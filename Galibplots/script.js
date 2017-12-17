@@ -9,24 +9,28 @@ d3.csv('data.csv', function (data) {
 	// Scales
   //var colorScale = d3.scale.category20()
     
-    var colors = ["blue", "green", "red"]
+    var colors = ["blue", "green", "red", "black"]
     var colorScale = d3.scale.ordinal()
-                    .domain(["LEO", "MEO", "GEO"])
+                    .domain(["LEO", "MEO", "GEO", "Elliptical"])
                     //.domain(function (d) {return d.ClassOfOrbit})
                     .range(colors);
     
+
+    
   var xScale = d3.scale.linear()
     .domain([
-    	d3.min([0,d3.min(data,function (d) { return d.Inclination})]),
-    	d3.max([0,d3.max(data,function (d) { return d.Inclination})])
-    	])
-    .range([0,w])
+    	d3.min(data,function (d) { return d.Inclination}),
+    	d3.max(data,function (d) { return d.Inclination})])
+    	
+    .range([0,w]);
+    
   var yScale = d3.scale.linear()
-    .domain([
-    	d3.min([0,d3.min(data,function (d) { return d.Eccentricity })]),
-    	d3.max([0,d3.max(data,function (d) { return d.Eccentricity })])
-    	])
-    .range([h,0])
+    .domain([0,1])
+    	//d3.min(data,function (d) { return d.Eccentricity}),
+    	//d3.max(data,function (d) { return d.Eccentricity})])
+    	
+    .range([h,0]);
+    
 	// SVG
 	var svg = body.append('svg')
 	    .attr('height',h + margin.top + margin.bottom)
@@ -37,13 +41,14 @@ d3.csv('data.csv', function (data) {
 	var xAxis = d3.svg.axis()
 	  .scale(xScale)
 	  //.tickFormat(formatPercent)
-	  .ticks(15)
+	  .ticks(10)
 	  .orient('bottom')
+    
   // Y-axis
 	var yAxis = d3.svg.axis()
 	  .scale(yScale)
 	  //.tickFormat(formatPercent)
-	  .ticks(15)
+	  .ticks(10)
 	  .orient('left')
   // Circles
   var circles = svg.selectAll('circle')
