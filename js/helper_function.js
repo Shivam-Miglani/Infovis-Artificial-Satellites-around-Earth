@@ -20,23 +20,23 @@ function locate(coord) {
                     d.r = d.major * (1 - d.Eccentricity * d.Eccentricity) / (1 - d.Eccentricity * Math.cos(toRadians(d.theta)));
                     d.r = d.r * scalingFactor;
         }
-        console.log(d.theta)
+        //console.log(d.theta)
         var x1 = d.r * Math.cos(toRadians(d.theta)) - (d.focus*scalingFactor);
-        console.log(x1);
+        //console.log(x1);
         var y1 = d.r * Math.sin(toRadians(d.theta));
-        console.log(y1)
+        //console.log(y1)
         if (d.theta > 360) {d.theta -= 360;}
 
         if (coord == "x") {
             //New x coordinates
             newX = d.cx + x1 * Math.cos(toRadians(phi)) - y1 * Math.sin(toRadians(phi));
             d.x = newX;
-            console.log(newX);
+            //console.log(newX);
             return newX;
         } else if (coord == "y") {
             newY =  d.cy + x1 * Math.sin(toRadians(phi)) + y1 * Math.cos(toRadians(phi));
             d.y = newY;
-            console.log(newY);
+            //console.log(newY);
             return newY;
         }
     };

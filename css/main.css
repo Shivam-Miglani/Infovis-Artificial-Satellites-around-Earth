@@ -9,19 +9,7 @@ body {
 
 h4,h5{
     text-align: center;
-}
-
-.bigButton {
-    font-family: Oswald;
-    font-size: 18px;
-    font-weight: 300;
-    color: white;
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid;
-    border-color: white;
-    cursor: pointer;
-    visibility: auto;
+    vertical-align:center;
 }
 
 #start {
@@ -47,40 +35,7 @@ span {
     vertical-align:middle
 }
 
-#buttonWrapper{
-    z-index: 1;
-    display: block;
-    font-family: Oswald;
-    font-size: 14px;
-    font-weight: 300;
-    color: white;
-    position: absolute;
-    left: 18px;
-    bottom: 18px;
-    width: 640px;
-    text-align: center;
-    overflow: hidden;
-    visibility: auto;
-}
 
-.sideButton {
-    float: left;
-    cursor: pointer;
-    width: 80px;
-}
-
-.sideButton a {
-    text-decoration: none;
-    color: white;
-}
-
-.sideButtonInv {
-    float: left;
-    cursor: pointer;
-    width: 80px;
-    opacity: 0;
-    cursor: pointer;
-}
 
 .bar {
     float: left;
@@ -107,34 +62,18 @@ span {
     font-size: 10px;
     color: white;
 }
+
 #name a {
     text-decoration: none;
     color: #CCCCCC;
 }
 
 .title {
-    font-family: Oswald;
     font-size: 20px;
     font-weight: 300;
     color: white;
     text-align: left;
 }
-
-.intro {
-    font-size: 12px;
-    font-weight: 300;
-    color: white;
-    text-align: left;
-}
-
-.explanation {
-    font-size: 14px;
-    font-weight: 300;
-    color: white;
-    text-align: center;
-    text-anchor: middle;
-}
-
 
 .progressWrapper {
     cursor: pointer;
