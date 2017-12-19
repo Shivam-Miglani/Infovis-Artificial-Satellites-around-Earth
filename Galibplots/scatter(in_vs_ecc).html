@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<html>
+  <head>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link rel='stylesheet' href='style.css'>
+  </head>
+  <body>
+      <div id="container">
+      <div id="Selection">
+        Select Country:
+          <select id = "Country" onchange="selectCountry()">
+          <option value ="USA" selected="selected">USA</option>
+            <option value ="Russia" selected="selected">Russia</option>
+              <option value ="India" selected="selected">India</option>
+              <option value ="NR" selected="selected">NR</option>
+          </select>
+        </div>
+          <button type="button" id="transition-axis">Transition axis</button>
+      </div>
+      <svg>
+      </svg>
+      
+      
+    <script type='text/javascript' src='script.js'></script>
+  </body>
+</html>
