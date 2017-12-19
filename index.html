@@ -13,9 +13,10 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
 
         <!--d3-->
-        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
 
         <!--bootstrap-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -32,24 +33,7 @@
             h3,h4{
                 text-align: center;
             }
-
-            /*linechart*/
-
-            path.line {
-                fill: none;
-                stroke: red;
-                stroke-width: 3px;
-            }
-
-            .axis path,
-            .axis line {
-                fill: none;
-                stroke: slategray;
-                shape-rendering: crispEdges;
-            }
-
         </style>
-
     </head>
     <body>
         <!--[if lte IE 9]>
@@ -60,12 +44,7 @@
         <h4>Tracks 1738 artificial satellites currently orbiting Earth</h4>
 
 
-
-
-
-
-
-
+        <div id="planetarium"></div>
 
 
 
@@ -77,9 +56,9 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/main.js"></script> <!--moving satellite-->
         <script src="js/helper_function.js"></script>
-        <script src="js/satellite.js"></script>
+        <script src="js/satellite.js"></script> <!--data-->
 
     </body>
 </html>

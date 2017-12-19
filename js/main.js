@@ -16,9 +16,9 @@ var resolution = 1,
     radiusEarth = 6371, //km
     phi = 0, //rotation of ellipses
     radiusSizer = 6, //Size increaser of radii of planets
-    planetOpacity = 0.6;
-scalingFactor = 0.01;
-timeFactor=1;
+    planetOpacity = 0.6,
+    scalingFactor = 0.01,
+    timeFactor=1;
 
 
 
