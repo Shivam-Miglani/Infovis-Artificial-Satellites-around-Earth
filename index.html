@@ -6,6 +6,7 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
 
         <link rel="manifest" href="site.webmanifest">
         <link rel="apple-touch-icon" href="icon.png">
@@ -41,8 +42,8 @@
                 <div class="col-md-2">
                     <div id="MainMenu">
                         <div class="list-group panel">
-                            <a href="#country" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Country</a>
-                            <div class="collapse list-group-submenu" id="country">
+                            <a href="#count" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Country</a>
+                            <div class="collapse list-group-submenu" id="count">
                                 <a href="" class="list-group-item">Subitem 1</a>
                                 <a href="" class="list-group-item">Subitem 2</a>
                                 <a href="" class="list-group-item">Subitem 3</a>
@@ -75,6 +76,27 @@
 
 
 
+        <!--ellipses-->
+        <div id="containerEllipses">
+            <div id="Selection">
+                Select Country:
+                <select id = "Country" onchange="selectCountry()">
+                    <option value ="USA" selected="selected">USA</option>
+                    <option value ="Russia" selected="selected">Russia</option>
+                    <option value ="India" selected="selected">India</option>
+                    <option value ="NR" selected="selected">NR</option>
+                </select>
+            </div>
+        </div>
+        <svg id="ellipsesvg"></svg>
+
+        <div id="zoomableScatter">
+            <button type="button" id="transition-axis">Transition axis</button>
+        </div>
+        <svg id="zoomsvg"></svg>
+
+
+
 
         <!--jquery-->
         <script src="js/vendor/modernizr-3.5.0.min.js"></script>
@@ -89,12 +111,15 @@
         <script src="js/satelliteOrbits.js" type="text/javascript"></script>
         <script src="js/countryBar.js" type="text/javascript"></script>
         <script src="js/timeSeries.js" type="text/javascript"></script>
+        <script src="js/ellipses.js" type="text/javascript"></script>
+        <script src="js/zoomablescatter.js" type="text/javascript"></script>
         <script src="js/main.js"></script> <!--moving satellite-->
-        <script>w3.includeHTML();</script>
 
         <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
+
+
 
     </body>
 </html>

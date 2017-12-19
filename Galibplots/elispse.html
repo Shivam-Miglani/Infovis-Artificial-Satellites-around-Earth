@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE html>x
 <meta charset='utf-8'>
 <html>
   <head>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    
+
       <link rel='stylesheet' href='style.css'>
   </head>
   <body>
-    
+
     <div id="container">
       <div id="Selection">
         Select Country:
@@ -21,15 +21,15 @@
       </div>
       <svg>
       </svg>
-      
-    
+
+
     <script>
-        
+
         function selectCountry(){
         var Country = document.getElementById("Country").value;
             update(Country);
         }
-    function update(Country){    
+    function update(Country){
       d3.csv('data.csv', function (data) {
   // Variables
     console.log("data loaded!")
@@ -40,24 +40,24 @@
 	var h = 1000 - margin.top - margin.bottom
 	var w = 1000 - margin.left - margin.right
     //Country = document.getElementById("Country").value;
-    
-    
+
+
 	//var formatPercent = d3.format('.2%')
 	// Scales
   //var colorScale = d3.scale.category20()
-    
+
     var colors = ["#1f77b4", "#2ca02c", "#d62728", "black"]
     var colorScale = d3.scale.ordinal()
                     .domain(["LEO", "MEO", "GEO", "Elliptical"])
                     //.domain(function (d) {return d.ClassOfOrbit})
                     .range(colors);
-    
+
     function translateFn(d){
-        
-        return "rotate(" + d.Inclination+ ", 500, 500)"; 
-        
+
+        return "rotate(" + d.Inclination+ ", 500, 500)";
+
     }
-    
+
   var xScale = d3.scale.linear()
     .domain([
     	d3.min([0,d3.min(data,function (d) { return d.major})]),
@@ -77,9 +77,9 @@
         .attr("fill", "#636363")
 	    .append('g')
 	    .attr('transform','translate(' + margin.left + ',' + margin.top + ')');
-          
-          
-	
+
+
+
     console.log(Country);
   // Circles
   var ellipse = svg.selectAll('ellipse')
@@ -113,11 +113,11 @@
                            '\nEccentricity: ' + d.Eccentricity +
                            '\nInclination: ' + d.Inclination +
                          '\nClass of orbit: ' + d.ClassOfOrbit})
-  
+
 })
-            
+
         }
-      
+
       </script>
   </body>
 </html>
