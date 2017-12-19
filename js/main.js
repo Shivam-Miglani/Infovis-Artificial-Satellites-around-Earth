@@ -15,15 +15,15 @@ var resolution = 1,
     au = 149597871, //km
     radiusEarth = 6371, //km
     phi = 0, //rotation of ellipses
-    radiusSizer = 6, //Size increaser of radii of planets
-    planetOpacity = 0.6,
+    radiusSizer = 6, //Size increaser of radii of satellites
+    satOpacity = 0.6,
     scalingFactor = 0.01,
     timeFactor=1;
 
 
 
 //Create SVG
-var svg = d3.select("#planetarium").append("svg")
+var svg = d3.select("#svgdiv").append("svg")
     .attr("width", x)
     .attr("height", y);
 
@@ -38,7 +38,7 @@ var container = svg.append("g").attr("class","container")
 
 //Create Earth in the Middle - scaled to the orbits
 //Radius of Earth in these coordinates (taking into account size of circle inside image)
-var ImageWidth = radiusEarth*10/au * 3000 * (2.7/1.5);
+var ImageWidth = radiusEarth*100/au * 3000 * (2.7/1.5);
 container.
 append("svg:image")
     .attr("x", -ImageWidth)
@@ -49,10 +49,6 @@ append("svg:image")
     .attr("height", ImageWidth*2)
     .attr("text-anchor", "middle");
 
-
-///////////////////////////////////////////////////////////////////////////
-/////////////////////////// Plot and move planets /////////////////////////
-///////////////////////////////////////////////////////////////////////////
 
 //Drawing a line for the orbit
 var orbitsContainer = container.append("g").attr("class","orbitsContainer");
@@ -69,16 +65,20 @@ var orbits = orbitsContainer.selectAll("g.orbit")
     .style("stroke-opacity", 0);
 
 // Drawing the satellites
-var planetContainer = container.append("g").attr("class","planetContainer");
-var satellites = planetContainer.selectAll("g.planet")
+var satContainer = container.append("g").attr("class","satContainer");
+var satellites = satContainer.selectAll("g.sat")
     .data(satellites).enter()
     .append("circle")
-    .attr("class", "planet")
-    .attr("r", function(d) {return radiusSizer*0.6;})   //rScale(d.Radius);})
-    .attr("cx", function(d) {return d.major;})
+    .attr("class", "sat")
+    .attr("r", function(d) {return radiusSizer*0.3;})
+    .attr("cx", function(d) {
+        if (d.major<10000)
+            return d.major*100;
+        else
+            return d.major;})
     .attr("cy", function(d) {return 0;})
     .style("fill", "red")
-    .style("opacity", planetOpacity)
+    .style("opacity", satOpacity)
     .style("stroke-opacity", 0)
     .style("stroke-width", "3px")
     .style("stroke", "yellow")

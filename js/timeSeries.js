@@ -2,7 +2,7 @@
 
 var div = d3.select("#linechart").append("div").attr("class", "toolTip");
 // load the data
-d3.json("launchCount.json", function(error, data) {
+d3.json("js/launchCount.json", function(error, data) {
 
     data.forEach(function(d) {
         d.launchYear = d.launchYear;

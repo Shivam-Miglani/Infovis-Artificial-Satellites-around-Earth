@@ -34,7 +34,7 @@ var counter = 1;
 var distance = [];
 
 //get data from csv
-d3.json("data.json", function (data) {
+d3.json(satellites, function (data) {
     data.forEach(function(d) {
         d.NameofSatellite = d.NameofSatellite;
         d.CountryofUNRegistry = d.CountryofUNRegistry;
@@ -43,7 +43,9 @@ d3.json("data.json", function (data) {
         d.Apogekm = +d.Apogekm;
         d.Perigeekm = +d.Perigeekm;
         distance.push(((+d.Apogekm)+(+d.Perigeekm))/2);
-    })
+    });
+
+    console.log();
 
 var myScale = d3.scale.linear().domain([0, 1000]).range([0,360]);//2 * Math.PI]);
 

@@ -31,7 +31,7 @@ var svg2 = d3.select("#bar").append("svg")
 
 
 // load the data
-d3.json("countryCount.json", function(error, data) {
+d3.json("js/countryCount.json", function(error, data) {
 
     data.forEach(function(d) {
         d.Country = d.Country;

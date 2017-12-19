@@ -1,8 +1,7 @@
 
-//Change x and y location of each planet
+//Change x and y location of each satellite
 d3.timer(function() {
-    //Move the planet - DO NOT USE TRANSITION
-    d3.selectAll(".planet")
+    d3.selectAll(".sat")
         .attr("cx", locate("x"))
         .attr("cy", locate("y"))
         .attr("transform", function(d) {
@@ -11,7 +10,7 @@ d3.timer(function() {
     ;
 });
 
-//Calculate the new x or y position per planet
+//Calculate the new x or y position per satellite
 function locate(coord) {
     return function(d){
         var k = 360 * d.major * d.minor  / ((d.Periodminutes*timeFactor) * resolution * speedUp);
@@ -50,7 +49,7 @@ function showEllipse(d, i, opacity) {
     var duration = (opacity == 0) ? 2000 : 100; //If the opacity is zero slowly remove the orbit line
 
     //Highlight the chosen planet
-    svg.selectAll(".planet")
+    svg.selectAll(".satellite")
         .filter(function(d, i) {return i == planet;})
         .transition().duration(duration)
         .style("stroke-opacity", opacity * 1.25);
@@ -76,7 +75,7 @@ function highlight(planet, delayTime){
     var time = 1000;
 
     //Highlight the chosen planet
-    svg.selectAll(".planet")
+    svg.selectAll(".sat")
         .filter(function(d, i) {return i == planet;})
         .transition().delay(700 * delayTime).duration(time)
         .style("stroke-opacity", 1)
@@ -102,7 +101,7 @@ function bringBack(opacity, delayTime){
     var time = 500;
 
     //Change opacity of all
-    svg.selectAll(".planet")
+    svg.selectAll(".sat")
         .transition().delay(700 * delayTime).duration(time)
         .style("opacity", opacity);
 
@@ -116,7 +115,7 @@ function dimOne(planet, delayTime) {
     var time = 500;
 
     //Dim all other planets
-    svg.selectAll(".planet")
+    svg.selectAll(".sat")
         .filter(function(d, i) {return i == planet;})
         .transition().delay(700 * delayTime).duration(time)
         .style("stroke-opacity", 0)
@@ -139,7 +138,7 @@ function dim(delayTime) {
     var time = 1000;
 
     //Dim all other planets
-    svg.selectAll(".planet")
+    svg.selectAll(".sat")
         .transition().delay(700 * delayTime).duration(time)
         .style("stroke-opacity", 0)
         .style("opacity", 0.1);
@@ -195,7 +194,5 @@ function updateWindow(){
 
     svg.attr("width", x).attr("height", y);
     d3.selectAll(".container").attr("transform", "translate(" + x/2 + "," + y/2 + ")");
-    d3.selectAll(".legendContainer").attr("transform", "translate(" + 30 + "," + (y - 90) + ")");
     d3.select("#crazy").style("left", (x/2 - 112/2 + 6) + "px").style("top", (y/2 - 100) + "px");
-    //d3.selectAll(".introWrapper").attr("transform", "translate(" + -x/2 + "," + -y/2 + ")");
-}//updateWindow
+}
