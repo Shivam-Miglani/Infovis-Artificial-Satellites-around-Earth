@@ -10,16 +10,16 @@ Primary style
 /*html {
     font-size: 62.5%;
 }
-
+*/
 body {
     font-size: 1.6rem;
-    font-family: "Jaldi", sans-serif;
+    font-family: "Lucida", sans-serif;
     color: #ffffff;
-    background-color: #a0f6aa;
+    /*background-color: black;*/
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-*/
+
 a {
     color: #a0f6aa;
     text-decoration: none;
@@ -311,9 +311,3 @@ Main Components
     transition: transform 0.3s;
 }
 
-/*circular orbits*/
-circle {
-    fill: none;
-    stroke: black;
-    stroke-width: 2px;
-}
