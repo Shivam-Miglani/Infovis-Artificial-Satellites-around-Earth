@@ -33,10 +33,45 @@
     <body>
         <h4>Satellite Tracker</h4>
         <h5>Tracks 1738 artificial satellites currently orbiting Earth</h5>
+
+
+        <!--left menu-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <div id="MainMenu">
+                        <div class="list-group panel">
+                            <a href="#country" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Country</a>
+                            <div class="collapse list-group-submenu" id="country">
+                                <a href="" class="list-group-item">Subitem 1</a>
+                                <a href="" class="list-group-item">Subitem 2</a>
+                                <a href="" class="list-group-item">Subitem 3</a>
+                            </div>
+                            <a href="#purpose" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Purpose</a>
+                            <div class="collapse list-group-submenu" id="purpose">
+                                <a href="" class="list-group-item">Subitem 1</a>
+                                <a href="" class="list-group-item">Subitem 2</a>
+                                <a href="" class="list-group-item">Subitem 3</a>
+                            </div>
+                            <a href="#user" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">User</a>
+                            <div class="collapse list-group-submenu" id="user">
+                                <a href="" class="list-group-item">Subitem 1</a>
+                                <a href="" class="list-group-item">Subitem 2</a>
+                                <a href="" class="list-group-item">Subitem 3</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
         <div id="svgdiv"></div>
         <div class="container col-sm-10" id="radarchart"></div>
         <div class="container col-sm-12" style="background-color:lightpink;" id="linechart"></div>
         <div class="container col-sm-12"  id="bar"></div>
+
 
 
 
@@ -55,6 +90,7 @@
         <script src="js/countryBar.js" type="text/javascript"></script>
         <script src="js/timeSeries.js" type="text/javascript"></script>
         <script src="js/main.js"></script> <!--moving satellite-->
+        <script>w3.includeHTML();</script>
 
         <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
