@@ -5,6 +5,11 @@ d3.csv('data.csv', function (data) {
 	var margin = { top: 50, right: 50, bottom: 50, left: 50 }
 	var h = 1000 - margin.top - margin.bottom
 	var w = 1000 - margin.left - margin.right
+    var Country = document.getElementById("Country").value;
+    
+    function selectCountry(){
+        Country = document.getElementById("Country").value;
+    }
 	//var formatPercent = d3.format('.2%')
 	// Scales
   //var colorScale = d3.scale.category20()
@@ -41,6 +46,7 @@ d3.csv('data.csv', function (data) {
 	  .append('g')
 	    .attr('transform','translate(' + margin.left + ',' + margin.top + ')')
 	
+    console.log(Country);
   // Circles
   var ellipse = svg.selectAll('ellipse')
       .data(data)
@@ -48,8 +54,8 @@ d3.csv('data.csv', function (data) {
     .append('ellipse')
       .attr('cx', 500 )
       .attr('cy', 500 )
-      .attr('rx', function(d) {return xScale(d.major*0.05)})
-      .attr('ry', function(d) {return yScale(d.minor*0.05)})
+      .attr('rx', function(d) {if (d.Country==Country){return xScale(d.major*0.05)}})
+      .attr('ry', function(d) {if (d.Country==Country){return yScale(d.minor*0.05)}})
       .attr('transform', translateFn)
       .attr('stroke',function (d) { return colorScale(d.ClassOfOrbit)})
       .attr("fill", "none")
