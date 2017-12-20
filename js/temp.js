@@ -1,3 +1,7 @@
+//Let's get some numbers from the satCount data
+//first, frequency of 
+
+
 // set the dimensions of the canvas
 var margin = {top: 20, right: 20, bottom: 70, left: 40},
     width = 600 - margin.left - margin.right,
@@ -12,7 +16,7 @@ var axisMargin = 20,
     barPadding = (height-axisMargin-margin*2)*0.6/sc.length,
     data, bar, svg, scale, xAxis, labelWidth = 0;
 
-max = d3.max(sc, function(d) { return d.Count; });
+max = d3.max(sc, function(d) { return d.Purpose; });
 
 svg = d3.select('#linechart1')
     .append("svg")
@@ -36,7 +40,7 @@ bar.append("text")
         .attr("y", barHeight / 2)
         .attr("dy", ".35em") //vertical align middle
         .text(function(d){
-            return d.launchYear;
+            return d.Purpose;
         }).each(function() {
     labelWidth = Math.ceil(Math.max(0,30));//labelWidth, this.getBBox().width));
 });
@@ -54,7 +58,7 @@ bar.append("rect")
     .attr("transform", "translate("+labelWidth+", 0)")
     .attr("height", barHeight)
     .attr("width", function(d){
-        return scale(d.Count);
+        return scale(d.Purpose);
     })            
     .append('title') // Tooltip
     .text(function (d) {
