@@ -38,7 +38,7 @@ bar.append("text")
         .text(function(d){
             return d.launchYear;
         }).each(function() {
-    labelWidth = Math.ceil(Math.max(labelWidth, this.getBBox().width));
+    labelWidth = Math.ceil(Math.max(0,30));//labelWidth, this.getBBox().width));
 });
 
 scale = d3.scale.linear()

@@ -96,7 +96,7 @@ var cc2 =    [{
             "Count": 3
         },
         {
-            "Country": "United Arab Emirates",
+            "Country": "UAE",
             "Count": 6
         },
         {
@@ -158,7 +158,7 @@ var cc2 =    [{
     ];
 
 var margin = {top: 20, right: 20, bottom: 70, left: 20},
-    width = 700 - margin.left - margin.right,
+    width = 800 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
 var axisMargin = 20,
@@ -196,7 +196,7 @@ bar.append("text")
         .text(function(d){
             return d.Country;
         }).each(function() {
-    labelWidth = Math.ceil(Math.max(labelWidth, this.getBBox().width));
+    labelWidth = Math.ceil(Math.max(0,90));//labelWidth, this.getBBox().width));
 });
 
 scale = d3.scale.linear()
