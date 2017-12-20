@@ -1,8 +1,11 @@
 //version 1
 //create the circular rings for orbit type
-var width = 800;
-var height = 600;
-var radius = 300;
+//var width = 800;
+//var height = 600;
+var margin = {top: 20, right: 20, bottom: 70, left: 40},
+    width = 800 - margin.left - margin.right,
+    height = 800 - margin.top - margin.bottom;
+var radius = 400;
 
 var svgContainer = d3.select("#radarchart").append("svg");
 
@@ -11,11 +14,6 @@ var svg = d3.select("#radarchart")
     .attr("height", height)
     .attr("width", width);
 
-var circle = svgContainer.append("circle")
-    .attr("cx", 30)
-    .attr("cy", 30)
-    .attr("r", 20)
-    .attr('fill', 'blue');
 
 var radargroup = svg.append("g").attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
 
@@ -24,7 +22,7 @@ var innerradius = [50, 100, 200, 300, 400];
 var outerradius = [radius - 400, radius - 300, radius - 200, radius - 100, radius];
 var startangle = [5, 25, 50, 75];
 var endangle = [25, 50, 75, 100]
-var fillcolor = ['#E4E5E4', '#D7D8D6', '#BFC0BF', '#3e4041'];
+var fillcolor = ["blue", 'pink', 'pink', 'pink', 'pink'];
 var counter = 1;
 
 var myScale = d3.scale.linear().domain([0, 1000]).range([0, 360]);
@@ -35,10 +33,10 @@ var svgquadrant = radargroup.append("g");
 svgquadrant.append("ellipse")
     .attr("id", "elli")
     .attr({
-        'stroke': '#fdfff2',
+        'stroke': 'black',
         'fill': 'transparent',
-        'rx': 420,
-        'ry': 120,
+        'rx': 400,
+        'ry': 100,
         'cx': 30,
         'cy': 50,
     });
@@ -54,6 +52,14 @@ for (var i = 0; i < innerradius.length; i++) {
 
     svgquadrant.append("path").attr('id', 'p' + i + i).attr("d", arcname).attr('fill', fillcolor[i]);
 }
+
+//putting earth at the center
+/*svgquadrant.append("circle")
+    .attr("cx", 3)
+    .attr("cy", -1)
+    .attr("r", 20)
+    .attr("stroke","blue")
+    .attr('fill', 'blue');*/
 
 
 var green = 0, red = 0, yellow = 0, blue = 0;
@@ -72,6 +78,7 @@ for (var j = 0; j < satellites.length; j++) {
         //console.log(orbits,sat);
         svgquadrant.append('circle')
             .style('fill', 'yellow')
+            .attr('opacity',0.1)
             .attr('r', 10)
             .attr('cx', coors[0])
             .attr('cy', coors[1])
@@ -79,7 +86,7 @@ for (var j = 0; j < satellites.length; j++) {
             .text(function (d) {
                 return satellites[j]["NameofSatellite"] +
                     '\nPurpose: ' + satellites[j]["Purpose"] +
-                    '\nCountry: ' + satellites[j]["CountryofUNRegistry"] +
+                    '\nCountry: ' + satellites[j]["Country"] +
                     '\nClass of orbit: ' + satellites[j]["ClassofOrbit"]
             });
     }
@@ -93,16 +100,15 @@ for (var j = 0; j < satellites.length; j++) {
         green += 1;
         svgquadrant.append('circle')
             .style('fill', 'green')
+            .attr('opacity',0.1)
             .attr('r', 10)
             .attr('cx', coors[0])
             .attr('cy', coors[1])
-            .attr('sat', sat)
-            .attr('orbits', orbits)
             .append('title') // Tooltip
             .text(function (d) {
                 return satellites[j]["NameofSatellite"] +
                     '\nPurpose: ' + satellites[j]["Purpose"] +
-                    '\nCountry: ' + satellites[j]["CountryofUNRegistry"] +
+                    '\nCountry: ' + satellites[j]["Country"] +
                     '\nClass of orbit: ' + satellites[j]["ClassofOrbit"]
             });
     }
@@ -117,6 +123,7 @@ for (var j = 0; j < satellites.length; j++) {
         var coors = [Math.cos(a) * r, Math.sin(a) * r];
         svgquadrant.append('circle')
             .style('fill', 'red')
+            .attr('opacity',0.1)
             .attr('r', 10)
             .attr('cx', coors[0])
             .attr('cy', coors[1])
@@ -124,7 +131,7 @@ for (var j = 0; j < satellites.length; j++) {
             .text(function (d) {
                 return satellites[j]["NameofSatellite"] +
                     '\nPurpose: ' + satellites[j]["Purpose"] +
-                    '\nCountry: ' + satellites[j]["CountryofUNRegistry"] +
+                    '\nCountry: ' + satellites[j]["Country"] +
                     '\nClass of orbit: ' + satellites[j]["ClassofOrbit"]
             });
     }
@@ -138,7 +145,8 @@ for (var j = 0; j < satellites.length; j++) {
         var coors = [Math.cos(a) * r, Math.sin(a) * r];
         //console.log(satellites[j]["NameofSatellite"] + satellites[j]["Purpose"] + satellites[j]["ClassofOrbit"]);
         svgquadrant.append('circle')
-            .style('fill', 'blue')
+            .style('fill', 'orange')
+            .attr('opacity',0.5)
             .attr('r', 10)
             .attr('cx', function () {
                 return 420 - Math.floor(Math.random() * 1500);
@@ -151,16 +159,34 @@ for (var j = 0; j < satellites.length; j++) {
             .text(function (d) {
                 return satellites[j]["NameofSatellite"] +
                     '\nPurpose: ' + satellites[j]["Purpose"] +
-                    '\nCountry: ' + satellites[j]["CountryofUNRegistry"] +
+                    '\nCountry: ' + satellites[j]["Country"] +
                     '\nClass of orbit: ' + satellites[j]["ClassofOrbit"]
-            })
-        d3.select("#infobox")
-            .on("mouseover", function (d) {
-                return satellites[j]["NameofSatellite"] +
-                    '\nPurpose: ' + satellites[j]["Purpose"] +
-                    '\nCountry: ' + satellites[j]["CountryofUNRegistry"] +
-                    '\nClass of orbit: ' + satellites[j]["ClassofOrbit"]
-            });
+            });                
+
+            d3.select('#infobox')
+                .selectAll('span')
+                .data([satellites[j]["NameofSatellite"], ('Purpose: ' + satellites[j]["Purpose"]),
+                    ('Country: ' + satellites[j]["Country"]),
+                    ('Class of orbit: ' + satellites[j]["ClassofOrbit"])])
+                .enter()
+                .append('span')
+                .text(function(d){
+                  return d;
+                })
+                .append('br')
+            d3.select('#infobox')
+                .selectAll('span')
+                                .text(function(d){
+                  return [satellites[j]["NameofSatellite"], ('Purpose: ' + satellites[j]["Purpose"]),
+                    ('Country: ' + satellites[j]["Country"]),
+                    ('Class of orbit: ' + satellites[j]["ClassofOrbit"])];
+                })
+                .append('span')
+
+                .append('br');
+            console.log([satellites[j]["NameofSatellite"], ('Purpose: ' + satellites[j]["Purpose"]),
+                    ('Country: ' + satellites[j]["Country"]),
+                    ('Class of orbit: ' + satellites[j]["ClassofOrbit"])]);
     }
 
 }

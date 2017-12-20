@@ -1,21 +1,18 @@
+    d3.csv('../data.csv', function (data) {
 
-
-
-    d3.csv('data.csv', function (data) {
-
-        console.log("data loaded")
+        console.log("data loaded");
 
         var margin = { top: 20, right: 20, bottom: 30, left: 30 };
         width = 900 - margin.left - margin.right,
             height = 480 - margin.top - margin.bottom;
 
         var colors = ["blue", "green", "red", "black"]
-        var colorScale = d3.scaleOrdinal()
+        var colorScale = d3.scale.ordinal()
             .domain(["LEO", "MEO", "GEO", "Elliptical"])
             //.domain(function (d) {return d.ClassOfOrbit})
             .range(colors);
 
-        var x = d3.scaleLinear()
+        var x = d3.scale.linear()
             .domain([
                 d3.min([0,d3.min(data,function (d) { return d.Inclination})]),
                 d3.max([0,d3.max(data,function (d) { return d.Inclination})])
@@ -23,7 +20,7 @@
             .range([0, width])
             .nice();
 
-        var y = d3.scaleLinear()
+        var y = d3.scale.linear()
             .domain([
                 d3.min([0,d3.min(data,function (d) { return d.ecc })]),
                 d3.max([0,d3.max(data,function (d) { return d.ecc })])
