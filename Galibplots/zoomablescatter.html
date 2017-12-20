@@ -13,7 +13,7 @@
 <body>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
- 
+
     <script>
 
         d3.csv('data.csv', function (data) {
@@ -39,91 +39,28 @@
                 .nice();
 
             var y = d3.scaleLinear()
-<<<<<<< HEAD
-                .domain([
-                    d3.min([0,d3.min(data,function (d) { return d.ecc })]),
-                    d3.max([0,d3.max(data,function (d) { return d.ecc })])
-                ])
-                .range([height, 0]);
-
-
-            var tooltip = d3.select("body").append("div")
-                .attr("class", "tooltip")
-                .style("opacity", 0);
-
-
-
-            var xAxis = d3.axisBottom(x).ticks(12),
-                yAxis = d3.axisLeft(y).ticks(12 * height / width);
-
-            var brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended),
-                idleTimeout,
-                idleDelay = 350;
-
-            var svg = d3.select("body").append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            var clip = svg.append("defs").append("svg:clipPath")
-                .attr("id", "clip")
-                .append("svg:rect")
-                .attr("width", width )
-                .attr("height", height )
-                .attr("x", 0)
-                .attr("y", 0);
-
-            //var xExtent = d3.extent(data, function (d) { return d.x; });
-            //var yExtent = d3.extent(data, function (d) { return d.y; });
-            //x.domain(d3.extent(data, function (d) { return d.x; })).nice();
-            //y.domain(d3.extent(data, function (d) { return d.y; })).nice();
-
-            var scatter = svg.append("g")
-                .attr("id", "scatterplot")
-                .attr("clip-path", "url(#clip)");
-
-            scatter.selectAll(".dot")
-                .data(data)
-                .enter().append("circle")
-                .attr("class", "dot")
-                .attr("r", 4)
-                .attr("cx", function (d) { return x(d.Inclination); })
-                .attr("cy", function (d) { return y(d.ecc); })
-                .attr("opacity", 0.5)
-                .style("fill", function (d) { return colorScale(d.ClassOfOrbit)})
-                .on('mousedown', function () {
-                    d3.select(this)
-                        .transition()
-                        .duration(500)
-                        .attr('r',6)
-                        .attr('stroke-width',.5)
-                        .attr('stroke', 'black')
-                })
-                .on('mouseout', function () {
-=======
                         .domain([
     	                           d3.min([0,d3.min(data,function (d) { return d.ecc })]),
     	                           d3.max([0,d3.max(data,function (d) { return d.ecc })])
     	                       ])
                         .range([height, 0]);
-                        
-            
+
+
         var tooltip = d3.select("body").append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
 
-       
+
 
         var xAxis = d3.axisBottom(x).ticks(12),
             yAxis = d3.axisLeft(y).ticks(12 * height / width);
 
-            
+
         //var brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended)
         //.on("start", function(){d3.select("scatter").call(brush)}),
           //  idleTimeout=100,
             //idleDelay = 350;
-     
+
         var svg = d3.select("body").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
@@ -135,8 +72,8 @@
             .append("svg:rect")
             .attr("width", width )
             .attr("height", height )
-            .attr("x", 0) 
-            .attr("y", 0); 
+            .attr("x", 0)
+            .attr("y", 0);
 
         //var xExtent = d3.extent(data, function (d) { return d.x; });
         //var yExtent = d3.extent(data, function (d) { return d.y; });
@@ -144,21 +81,21 @@
         //y.domain(d3.extent(data, function (d) { return d.y; })).nice();
 
 
-            
+
 
         var scatter = svg.append("g")
              .attr("id", "scatterplot")
              .attr("clip-path", "url(#clip)");
-            
+
             var brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended),
         //.on("start", function(){d3.select("scatter").call(brush)}),
             idleTimeout,
             idleDelay = 350;
-            
+
             scatter.append("g")
             .attr("class", "brush")
             .call(brush)
-            
+
         scatter.selectAll(".dot")
             .data(data)
           .enter().append("circle")
@@ -169,7 +106,7 @@
             .attr("opacity", 0.5)
             .style("fill", function (d) { return colorScale(d.ClassOfOrbit)})
             .on('mouseover', function () {
-                //scatter.select(".brush").call(brush.move, null);    
+                //scatter.select(".brush").call(brush.move, null);
                 d3.select(this)
                       .transition()
                       .duration(500)
@@ -179,7 +116,6 @@
                   })
                   .on('mouseout', function () {
                     //scatter.select(".brush").call(brush);
->>>>>>> master
                     d3.select(this)
                         .transition()
                         .duration(500)
@@ -187,64 +123,13 @@
 
                 })
                 .append('title') // Tooltip
-<<<<<<< HEAD
-                .text(function (d) { return d.NameofSatellite +
-                    '\nEccentricity: ' + d.Eccentricity +
-                    '\nInclination: ' + d.Inclination +
-                    '\nClass of orbit: ' + d.ClassOfOrbit});
 
-            // x axis
-            svg.append("g")
-                .attr("class", "x axis")
-                .attr('id', "axis--x")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis);
-
-            svg.append("text")
-                .style("text-anchor", "end")
-                .attr("x", width)
-                .attr("y", height - 8)
-                .text("Inclination");
-
-            // y axis
-            svg.append("g")
-                .attr("class", "y axis")
-                .attr('id', "axis--y")
-                .call(yAxis);
-
-            svg.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 6)
-                .attr("dy", "1em")
-                .style("text-anchor", "end")
-                .text("Eccentricity");
-
-            scatter.append("g")
-                .attr("class", "brush")
-                .call(brush);
-
-            function brushended() {
-
-                var s = d3.event.selection;
-                if (!s) {
-                    if (!idleTimeout) return idleTimeout = setTimeout(idled, idleDelay);
-                    x.domain(d3.extent(data, function (d) { return d.Inclination; })).nice();
-                    y.domain(d3.extent(data, function (d) { return d.ecc; })).nice();
-                } else {
-
-                    x.domain([s[0][0], s[1][0]].map(x.invert, x));
-                    y.domain([s[1][1], s[0][1]].map(y.invert, y));
-                    scatter.select(".brush").call(brush.move, null);
-                }
-                zoom();
-            }
-=======
                   .text(function (d) { return d.NameofSatellite +
                                        '\nEccentricity: ' + d.Eccentricity +
                                        '\nInclination: ' + d.Inclination +
                                      '\nClass of orbit: ' + d.ClassOfOrbit});
-            
- 
+
+
 
 
         // x axis
@@ -273,12 +158,12 @@
             .style("text-anchor", "end")
             .text("Eccentricity");
 
-         
+
             //scatter.append("g")
             //.attr("class", "brush")
             //.call(brush);
-        
-            
+
+
         function brushended() {
 
             var s = d3.event.selection;
@@ -295,7 +180,7 @@
             zoom();
             //console.log("zoomed")
         }
->>>>>>> master
+
 
             function idled() {
                 idleTimeout = null;
@@ -303,15 +188,6 @@
 
             function zoom() {
 
-<<<<<<< HEAD
-                var t = scatter.transition().duration(750);
-                svg.select("#axis--x").transition(t).call(xAxis);
-                svg.select("#axis--y").transition(t).call(yAxis);
-                scatter.selectAll("circle").transition(t)
-                    .attr("cx", function (d) { return x(d.Inclination); })
-                    .attr("cy", function (d) { return y(d.ecc); });
-            }
-=======
             var t = scatter.transition().duration(750);
             svg.select("#axis--x").transition(t).call(xAxis);
             svg.select("#axis--y").transition(t).call(yAxis);
@@ -320,7 +196,6 @@
             .attr("cy", function (d) { return y(d.ecc); });
             //console.log("zoomed22")
         }
->>>>>>> master
         })
     </script>
 </body>

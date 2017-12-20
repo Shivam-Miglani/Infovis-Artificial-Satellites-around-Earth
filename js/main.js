@@ -3,11 +3,9 @@ var
     w = window,
     d = document,
     e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
+    g = d.getElementById('tab1')[0],
     x = (w.innerWidth || e.clientWidth || g.clientWidth) - 50,
     y = (w.innerHeight|| e.clientHeight|| g.clientHeight) - 50;
-
-window.onresize = updateWindow;
 
 //Satellite orbit variables
 var resolution = 1,
@@ -15,30 +13,23 @@ var resolution = 1,
     au = 149597871, //km
     radiusEarth = 6371, //km
     phi = 0, //rotation of ellipses
-    radiusSizer = 6, //Size increaser of radii of satellites
+    radiusSizer = 5, //Size increaser of radii of satellites
     satOpacity = 0.6,
-    scalingFactor = 0.01,
-    timeFactor=1;
-
-
+    scalingFactor = 0.05,
+    timeFactor=60;
 
 //Create SVG
-var svg = d3.select("#svgdiv").append("svg")
+var svg = d3.select("#motionsvgdiv").append("svg")
     .attr("width", x)
     .attr("height", y);
-
-
 
 //Create a container for everything with the centre in the middle
 var container = svg.append("g").attr("class","container")
     .attr("transform", "translate(" + x/2 + "," + y/2 + ")")
 
 
-
-
-//Create Earth in the Middle - scaled to the orbits
-//Radius of Earth in these coordinates (taking into account size of circle inside image)
-var ImageWidth = radiusEarth*100/au * 3000 * (2.7/1.5);
+//Create Earth in the Middle
+var ImageWidth = radiusEarth*50/au * 3000 * (2.7/1.5);
 container.
 append("svg:image")
     .attr("x", -ImageWidth)
@@ -46,8 +37,7 @@ append("svg:image")
     .attr("class", "sun")
     .attr("xlink:href", "img/earth.png")
     .attr("width", ImageWidth*2)
-    .attr("height", ImageWidth*2)
-    .attr("text-anchor", "middle");
+    .attr("height", ImageWidth*2);
 
 
 //Drawing a line for the orbit
@@ -66,25 +56,19 @@ var orbits = orbitsContainer.selectAll("g.orbit")
 
 // Drawing the satellites
 var satContainer = container.append("g").attr("class","satContainer");
-var satellites = satContainer.selectAll("g.sat")
+var satellite = satContainer.selectAll("g.sat")
     .data(satellites).enter()
     .append("circle")
     .attr("class", "sat")
     .attr("r", function(d) {return radiusSizer*0.3;})
-    .attr("cx", function(d) {
-        if (d.major<10000)
-            return d.major*100;
-        else
-            return d.major;})
-    .attr("cy", function(d) {return 0;})
+    .attr("cx", function(d) {return d.major;})
+    .attr("cy", 0)
     .style("fill", "red")
     .style("opacity", satOpacity)
     .style("stroke-opacity", 0)
     .style("stroke-width", "3px")
     .style("stroke", "yellow")
     .on("mouseover", function(d, i) {
-        stopTooltip = false
-        showTooltip(d);
         showEllipse(d, i, 0.8);
     })
     .on("mouseout", function(d, i) {
