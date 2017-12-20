@@ -1,4 +1,4 @@
-var satCount = [{
+var sc = [{
 	"Country": "NR (10/17)",
 	"Purpose": "Technology Development",
 	"User": "Civil",
