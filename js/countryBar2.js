@@ -1,6 +1,6 @@
 // set the dimensions of the canvas
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
-    width = 600 - margin.left - margin.right,
+var margin = {top: 20, right: 20, bottom: 70, left: 20},
+    width = 700 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
 var axisMargin = 20,
@@ -8,20 +8,20 @@ var axisMargin = 20,
     valueMargin = 4,
     //width = parseInt(d3.select('#linechart').style('width'), 10),
     //height = parseInt(d3.select('#linechart').style('height'), 10),
-    barHeight = (height-axisMargin-margin*2)* 0.4/lc.length,
-    barPadding = (height-axisMargin-margin*2)*0.6/lc.length,
+    barHeight = (height-axisMargin-margin*2)* 0.4/cc.length,
+    barPadding = (height-axisMargin-margin*2)*0.6/cc.length,
     data, bar, svg, scale, xAxis, labelWidth = 0;
 
-max = d3.max(lc, function(d) { return d.launchCount; });
+max = d3.max(cc, function(d) { return d.Count; });
 
-svg = d3.select('#linechart')
+svg = d3.select('#bar')
     .append("svg")
     .attr("width", width)
     .attr("height", height);
 
 
 bar = svg.selectAll("g")
-    .data(lc)
+    .data(cc)
     .enter()
     .append("g");
 
@@ -36,7 +36,7 @@ bar.append("text")
         .attr("y", barHeight / 2)
         .attr("dy", ".35em") //vertical align middle
         .text(function(d){
-            return d.launchYear;
+            return d.Country;
         }).each(function() {
     labelWidth = Math.ceil(Math.max(labelWidth, this.getBBox().width));
 });
@@ -54,13 +54,12 @@ bar.append("rect")
     .attr("transform", "translate("+labelWidth+", 0)")
     .attr("height", barHeight)
     .attr("width", function(d){
-        return scale(d.launchCount);
+        return scale(d.Count);
     })            
     .append('title') // Tooltip
     .text(function (d) {
-        return d.launchYear + ' has ' + d.launchCount;
+        return d.Country + ' has ' + d.Count + ' satellites ';
     });
-
 
 
 svg.insert("g",":first-child")

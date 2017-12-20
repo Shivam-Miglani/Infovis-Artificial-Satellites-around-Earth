@@ -1,4 +1,4 @@
-[{
+var lc = [{
   "launchYear": 1974,
   "launchCount": 1
 },
