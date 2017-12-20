@@ -136,7 +136,7 @@ for (var j = 0; j < satellites.length; j++) {
         var a = (100 + 150) / 2 - (Math.PI / 2);
         a += (0.436332 * j);
         var coors = [Math.cos(a) * r, Math.sin(a) * r];
-        console.log(satellites[j]["NameofSatellite"] + satellites[j]["Purpose"] + satellites[j]["ClassofOrbit"]);
+        //console.log(satellites[j]["NameofSatellite"] + satellites[j]["Purpose"] + satellites[j]["ClassofOrbit"]);
         svgquadrant.append('circle')
             .style('fill', 'blue')
             .attr('r', 10)

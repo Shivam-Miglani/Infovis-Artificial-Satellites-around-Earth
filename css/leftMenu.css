@@ -5,3 +5,8 @@
 .list-group-submenu {
     margin-left:10px;
 }
+
+#MainMenu{
+    font-family: "Lucida", sans-serif;
+    font-size: smaller;
+}

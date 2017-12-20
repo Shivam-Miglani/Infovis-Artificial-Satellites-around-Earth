@@ -39,26 +39,35 @@
         <!--left menu-->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <div id="MainMenu">
                         <div class="list-group panel">
                             <a href="#count" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Country</a>
                             <div class="collapse list-group-submenu" id="count">
-                                <a href="" class="list-group-item">Subitem 1</a>
-                                <a href="" class="list-group-item">Subitem 2</a>
-                                <a href="" class="list-group-item">Subitem 3</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="usa();">USA</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="ind();">India</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="rus();">Russia</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="fr();">France</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="chi();">China</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="all();">All</a>
                             </div>
                             <a href="#purpose" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Purpose</a>
                             <div class="collapse list-group-submenu" id="purpose">
-                                <a href="" class="list-group-item">Subitem 1</a>
-                                <a href="" class="list-group-item">Subitem 2</a>
-                                <a href="" class="list-group-item">Subitem 3</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="com();">Communication</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="met();">Meteorology</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="tec();">Technology research</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="gps();">GPS/GLONASS</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="sur();">Surveillance</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="all();">All</a>
+
                             </div>
                             <a href="#user" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">User</a>
                             <div class="collapse list-group-submenu" id="user">
-                                <a href="" class="list-group-item">Subitem 1</a>
-                                <a href="" class="list-group-item">Subitem 2</a>
-                                <a href="" class="list-group-item">Subitem 3</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="civ();">Civil</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="mil();">Military</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="commercial();">Commercial</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="govt();">Government</a>
+                                <a href="javascript:;" class="list-group-item li" onclick="all();">All</a>
                             </div>
                         </div>
                     </div>
@@ -113,6 +122,7 @@
         <script src="js/countryBar.js" type="text/javascript"></script>
 
         <script src="js/timeSeries.js" type="text/javascript"></script>
+        <script src="js/leftmenuhandler.js" type="text/javascript"></script>
         <script src="js/ellipses.js" type="text/javascript"></script>
         <script src="js/zoomablescatter.js" type="text/javascript"></script>
         <script src="js/main.js"></script> <!--moving satellite-->

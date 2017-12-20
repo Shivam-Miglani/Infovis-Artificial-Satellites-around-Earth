@@ -41,8 +41,7 @@ y.domain([0, d3.max(cc, function (d) {
     return d.Count;
 })]);
 
-console.log(cc[0].Count);
-console.log(cc[0].Country);
+
 // add axis
 svg2.append("g")
     .attr("class", "x axis")
