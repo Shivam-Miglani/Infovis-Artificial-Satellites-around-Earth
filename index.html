@@ -24,57 +24,87 @@
         <script src="https://d3js.org/d3.v3.min.js"></script>
 
         <!--bootstrap-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
 
 
     <body>
-        <h4>Satellite Tracker</h4>
-        <h5>Tracks 1738 artificial satellites currently orbiting Earth</h5>
 
 
-        <!--left menu-->
+        <!--tabbed menu-->
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-1">
-                    <div id="MainMenu">
-                        <div class="list-group panel">
-                            <a href="#count" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Country</a>
-                            <div class="collapse list-group-submenu" id="count">
-                                <a href="javascript:;" class="list-group-item li" onclick="usa();">USA</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="ind();">India</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="rus();">Russia</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="fr();">France</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="chi();">China</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="all();">All</a>
-                            </div>
-                            <a href="#purpose" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Purpose</a>
-                            <div class="collapse list-group-submenu" id="purpose">
-                                <a href="javascript:;" class="list-group-item li" onclick="com();">Communication</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="met();">Meteorology</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="tec();">Technology research</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="gps();">GPS/GLONASS</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="sur();">Surveillance</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="all();">All</a>
+            <h4>Satellite Tracker</h4>
+            <h5>Tracks 1738 artificial satellites currently orbiting Earth</h5>
 
-                            </div>
-                            <a href="#user" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">User</a>
-                            <div class="collapse list-group-submenu" id="user">
-                                <a href="javascript:;" class="list-group-item li" onclick="civ();">Civil</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="mil();">Military</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="commercial();">Commercial</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="govt();">Government</a>
-                                <a href="javascript:;" class="list-group-item li" onclick="all();">All</a>
-                            </div>
-                        </div>
-                    </div>
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab1">Position and Orbits</a></li>
+                <li><a data-toggle="tab" href="#tab2">Users and Purposes</a></li>
+            </ul>
 
+            <div class="tab-content">
+                <div id="tab1" class="tab-pane fade in active">
+
+                </div>
+                <div id="tab2" class="tab-pane fade">
+
+                </div>
+
+
+
+
+
+
+                </div>
+                <div id="menu3" class="tab-pane fade">
+                    <h3>Menu 3</h3>
+                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
             </div>
         </div>
+
+
+
+        <!--left menu-->
+        <!--<div class="container-fluid">-->
+            <!--<div class="row">-->
+                <!--<div class="col-md-1">-->
+                    <!--<div id="MainMenu">-->
+                        <!--<div class="list-group panel">-->
+                            <!--<a href="#count" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Country</a>-->
+                            <!--<div class="collapse list-group-submenu" id="count">-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="usa();">USA</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="ind();">India</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="rus();">Russia</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="fr();">France</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="chi();">China</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="all();">All</a>-->
+                            <!--</div>-->
+                            <!--<a href="#purpose" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Purpose</a>-->
+                            <!--<div class="collapse list-group-submenu" id="purpose">-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="com();">Communication</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="met();">Meteorology</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="tec();">Technology research</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="gps();">GPS/GLONASS</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="sur();">Surveillance</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="all();">All</a>-->
+
+                            <!--</div>-->
+                            <!--<a href="#user" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">User</a>-->
+                            <!--<div class="collapse list-group-submenu" id="user">-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="civ();">Civil</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="mil();">Military</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="commercial();">Commercial</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="govt();">Government</a>-->
+                                <!--<a href="javascript:;" class="list-group-item li" onclick="all();">All</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
         <div id="svgdiv"></div>
