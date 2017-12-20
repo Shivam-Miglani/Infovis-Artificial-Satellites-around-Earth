@@ -1,4 +1,4 @@
-	[{
+var cc =	[{
 			"Country": "NR (10/17)",
 			"Count": 236
 		},
@@ -214,4 +214,4 @@
 			"Country": "China/Sri Lanka",
 			"Count": 1
 		}
-	]
+	];

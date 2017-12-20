@@ -30,47 +30,56 @@ var svg2 = d3.select("#bar").append("svg")
 
 
 // load the data
-d3.json("js/countryCount.json", function(error, data) {
-    data.forEach(function(d) {
-        d.Country = d.Country;
-        d.Count = +d.Count;
+
+
+// scale the range of the data
+
+x.domain(cc.map(function (d) {
+    return d.Country;
+}));
+y.domain([0, d3.max(cc, function (d) {
+    return d.Count;
+})]);
+
+console.log(cc[0].Count);
+console.log(cc[0].Country);
+// add axis
+svg2.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "-.8em")
+    .attr("dy", "-.55em")
+    .attr("transform", "rotate(-90)");
+
+
+svg2.append("g")
+    .attr("class", "y axis")
+    .call(yAxis)
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 5)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end")
+    .text("Count of Satellites");
+
+
+// Add bar chart
+svg2.selectAll("#bar")
+    .data(cc)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function (d) {
+        return x(d.Country);
+    })
+    .attr("width", x.rangeBand())
+    .attr("y", function (d) {
+        return y(d.Count);
+    })
+    .attr("height", function (d) {
+        return height - y(d.Count);
     });
 
-    // scale the range of the data
-    x.domain(data.map(function(d) { return d.Country; }));
-    y.domain([0, d3.max(data, function(d) { return d.Count; })]);
 
-    // add axis
-    svg2.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis)
-        .selectAll("text")
-        .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", "-.55em")
-        .attr("transform", "rotate(-90)");
-
-
-    svg2.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 5)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Count of Satellites");
-
-
-    // Add bar chart
-    svg2.selectAll("#bar")
-        .data(data)
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) { return x(d.Country); })
-        .attr("width", x.rangeBand())
-        .attr("y", function(d) { return y(d.Count); })
-        .attr("height", function(d) { return height - y(d.Count); });
-
-});
