@@ -62,7 +62,6 @@ for (var i = 0; i < innerradius.length; i++) {
     .attr('fill', 'blue');*/
 
 
-
 var green = 0, red = 0, yellow = 0, blue = 0;
 
 //plotting planets in each level
@@ -87,7 +86,7 @@ for (var j = 0; j < satellites.length; j++) {
             .text(function (d) {
                 return satellites[j]["NameofSatellite"] +
                     '\nPurpose: ' + satellites[j]["Purpose"] +
-                    '\nCountry: ' + satellites[j]["CountryofUNRegistry"] +
+                    '\nCountry: ' + satellites[j]["Country"] +
                     '\nClass of orbit: ' + satellites[j]["ClassofOrbit"]
             });
     }
@@ -105,13 +104,11 @@ for (var j = 0; j < satellites.length; j++) {
             .attr('r', 10)
             .attr('cx', coors[0])
             .attr('cy', coors[1])
-            .attr('sat', sat)
-            .attr('orbits', orbits)
             .append('title') // Tooltip
             .text(function (d) {
                 return satellites[j]["NameofSatellite"] +
                     '\nPurpose: ' + satellites[j]["Purpose"] +
-                    '\nCountry: ' + satellites[j]["CountryofUNRegistry"] +
+                    '\nCountry: ' + satellites[j]["Country"] +
                     '\nClass of orbit: ' + satellites[j]["ClassofOrbit"]
             });
     }
@@ -134,7 +131,7 @@ for (var j = 0; j < satellites.length; j++) {
             .text(function (d) {
                 return satellites[j]["NameofSatellite"] +
                     '\nPurpose: ' + satellites[j]["Purpose"] +
-                    '\nCountry: ' + satellites[j]["CountryofUNRegistry"] +
+                    '\nCountry: ' + satellites[j]["Country"] +
                     '\nClass of orbit: ' + satellites[j]["ClassofOrbit"]
             });
     }
@@ -148,7 +145,7 @@ for (var j = 0; j < satellites.length; j++) {
         var coors = [Math.cos(a) * r, Math.sin(a) * r];
         //console.log(satellites[j]["NameofSatellite"] + satellites[j]["Purpose"] + satellites[j]["ClassofOrbit"]);
         svgquadrant.append('circle')
-            .style('fill', 'blue')
+            .style('fill', 'orange')
             .attr('opacity',0.5)
             .attr('r', 10)
             .attr('cx', function () {
@@ -162,9 +159,34 @@ for (var j = 0; j < satellites.length; j++) {
             .text(function (d) {
                 return satellites[j]["NameofSatellite"] +
                     '\nPurpose: ' + satellites[j]["Purpose"] +
-                    '\nCountry: ' + satellites[j]["CountryofUNRegistry"] +
+                    '\nCountry: ' + satellites[j]["Country"] +
                     '\nClass of orbit: ' + satellites[j]["ClassofOrbit"]
-            });
+            });                
+
+            d3.select('#infobox')
+                .selectAll('span')
+                .data([satellites[j]["NameofSatellite"], ('Purpose: ' + satellites[j]["Purpose"]),
+                    ('Country: ' + satellites[j]["Country"]),
+                    ('Class of orbit: ' + satellites[j]["ClassofOrbit"])])
+                .enter()
+                .append('span')
+                .text(function(d){
+                  return d;
+                })
+                .append('br')
+            d3.select('#infobox')
+                .selectAll('span')
+                                .text(function(d){
+                  return [satellites[j]["NameofSatellite"], ('Purpose: ' + satellites[j]["Purpose"]),
+                    ('Country: ' + satellites[j]["Country"]),
+                    ('Class of orbit: ' + satellites[j]["ClassofOrbit"])];
+                })
+                .append('span')
+
+                .append('br');
+            console.log([satellites[j]["NameofSatellite"], ('Purpose: ' + satellites[j]["Purpose"]),
+                    ('Country: ' + satellites[j]["Country"]),
+                    ('Class of orbit: ' + satellites[j]["ClassofOrbit"])]);
     }
 
 }
