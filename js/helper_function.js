@@ -42,18 +42,18 @@ function locate(coord) {
 
 //Show the total orbit of the hovered over planet
 function showEllipse(d, i, opacity) {
-    var planet = i;
+    var satellite = i;
     var duration = (opacity === 0) ? 2000 : 100; //If the opacity is zero slowly remove the orbit line
 
     //Highlight the chosen planet
-    svg.selectAll(".satellite")
-        .filter(function(d, i) {return i == planet;})
+    svg.selectAll(".sat")
+        .filter(function(d, i) {return i == satellite;})
         .transition().duration(duration)
         .style("stroke-opacity", opacity * 1.25);
 
     //Select the orbit with the same index as the planet
     svg.selectAll(".orbit")
-        .filter(function(d, i) {return i == planet;})
+        .filter(function(d, i) {return i == satellite;})
         .transition().duration(duration)
         .style("stroke-opacity", opacity)
         .style("fill-opacity", opacity/3);

@@ -1,7 +1,6 @@
 
 d3.csv('data_ellipse.csv', function (data) {
 
-    console.log("data loaded")
 
     var margin = { top: 20, right: 20, bottom: 30, left: 30 };
     width = 900 - margin.left - margin.right,

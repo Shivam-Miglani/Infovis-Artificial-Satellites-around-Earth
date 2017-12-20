@@ -1,35 +1,70 @@
-<!DOCTYPE html>x
+<!DOCTYPE html>
 <meta charset='utf-8'>
 <html>
   <head>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
+    
       <link rel='stylesheet' href='style.css'>
   </head>
   <body>
-
+    
     <div id="container">
-      <div id="Selection">
+      <div id="Selection1">
         Select Country:
-          <select id = "Country" onchange="selectCountry()">
-          <option value ="USA" selected="selected">USA</option>
+          <select id = "Country" onchange="select()">
+            <option value ="USA" selected="selected">USA</option>
             <option value ="Russia" selected="selected">Russia</option>
+              <option value ="China" selected="selected">China</option>
+              <option value ="South Korea" selected="selected">South Korea</option>
+              <option value ="Germany" selected="selected">Germany</option>
               <option value ="India" selected="selected">India</option>
-              <option value ="NR" selected="selected">NR</option>
+              <option value ="Japan" selected="selected">Japan</option>
+              <option value ="Norway" selected="selected">Norway</option>
+              <option value ="All" selected="selected">All</option>
+          </select>
+        </div>
+        <div id="Selection2">
+        Select Users:
+          <select id = "Users" onchange="select()">
+          <option value ="Civil" selected="selected">Civil</option>
+            <option value ="Military" selected="selected">Military</option>
+              <option value ="Commercial" selected="selected">Commercial</option>
+              <option value ="Government" selected="selected">Government</option>
+              <option value ="All" selected="selected">All</option>
+              
           </select>
         </div>
       </div>
       <svg>
       </svg>
-
-
+      
+    
     <script>
-
-        function selectCountry(){
-        var Country = document.getElementById("Country").value;
-            update(Country);
+        
+        
+        
+        function select(){
+            var Country = document.getElementById("Country").value;
+            var Users = document.getElementById("Users").value;
+            if(Country=="All" && Users=="All"){location.reload()}
+            console.log(Country);
+            console.log(Users);
+            update(Country , Users);
         }
-    function update(Country){
+        
+        
+        function selectCountry(){
+            var Country = document.getElementById("Country").value;
+            var Users = document.getElementById("Users").value;
+            update(Country , Users);
+        }
+        function selectUsers(){
+            var Users = document.getElementById("Users").value;
+            var Country = document.getElementById("Country").value;
+            console.log(Users);
+            update(Country, Users);
+        }
+    function update(Country, Users){    
       d3.csv('data.csv', function (data) {
   // Variables
     console.log("data loaded!")
@@ -40,24 +75,24 @@
 	var h = 1000 - margin.top - margin.bottom
 	var w = 1000 - margin.left - margin.right
     //Country = document.getElementById("Country").value;
-
-
+    
+    
 	//var formatPercent = d3.format('.2%')
 	// Scales
   //var colorScale = d3.scale.category20()
-
+    
     var colors = ["#1f77b4", "#2ca02c", "#d62728", "black"]
     var colorScale = d3.scale.ordinal()
                     .domain(["LEO", "MEO", "GEO", "Elliptical"])
                     //.domain(function (d) {return d.ClassOfOrbit})
                     .range(colors);
-
+    
     function translateFn(d){
-
-        return "rotate(" + d.Inclination+ ", 500, 500)";
-
+        
+        return "rotate(" + d.Inclination+ ", 500, 500)"; 
+        
     }
-
+    
   var xScale = d3.scale.linear()
     .domain([
     	d3.min([0,d3.min(data,function (d) { return d.major})]),
@@ -77,10 +112,10 @@
         .attr("fill", "#636363")
 	    .append('g')
 	    .attr('transform','translate(' + margin.left + ',' + margin.top + ')');
-
-
-
-    console.log(Country);
+          
+          
+	
+    console.log(Users);
   // Circles
   var ellipse = svg.selectAll('ellipse')
       .data(data)
@@ -88,8 +123,14 @@
     .append('ellipse')
       .attr('cx', 500 )
       .attr('cy', 500 )
-      .attr('rx', function(d) {if (d.Country==Country){return xScale(d.major*0.05)}})
-      .attr('ry', function(d) {if (d.Country==Country){return yScale(d.minor*0.05)}})
+      .attr('rx', function(d) {if (d.Country==Country && d.Users==Users){return xScale(d.major*0.05)}
+                              else if(Country=="All") {if(d.Users==Users){return xScale(d.major*0.05)}}
+                              //else if(Country=="All" && Users=="All"){return xScale(d.major*0.05)}
+                              else if(Users=="All") {if(d.Country==Country){return xScale(d.major*0.05)}}})
+      .attr('ry', function(d) {if (d.Country==Country && d.Users==Users){return yScale(d.minor*0.05)}
+                              else if(Country=="All"){if(d.Users==Users){return yScale(d.minor*0.05)}}
+                              //else if(Country=="All" && Users=="All"){return yScale(d.minor*0.05)}
+                              else if(Users=="All"){if(d.Country==Country){return yScale(d.minor*0.05)}}})
       .attr('transform', translateFn)
       .attr('stroke',function (d) { return colorScale(d.ClassOfOrbit)})
       .attr("fill", "none")
@@ -112,12 +153,103 @@
       .text(function (d) { return d.NameofSatellite +
                            '\nEccentricity: ' + d.Eccentricity +
                            '\nInclination: ' + d.Inclination +
-                         '\nClass of orbit: ' + d.ClassOfOrbit})
-
+                         '\nClass of orbit: ' + d.ClassOfOrbit
+                         })
+  
 })
-
+            
         }
-
+        
+        d3.csv('data.csv', function (data) {
+  // Variables
+    console.log("data loaded!")
+  var body = d3.select('body');
+  var svg = d3.select('svg');
+          svg.selectAll("g").remove();
+	var margin = { top: 50, right: 50, bottom: 50, left: 50 }
+	var h = 1000 - margin.top - margin.bottom
+	var w = 1000 - margin.left - margin.right
+    //Country = document.getElementById("Country").value;
+    
+    
+	//var formatPercent = d3.format('.2%')
+	// Scales
+  //var colorScale = d3.scale.category20()
+    
+    var colors = ["#1f77b4", "#2ca02c", "#d62728", "black"]
+    var colorScale = d3.scale.ordinal()
+                    .domain(["LEO", "MEO", "GEO", "Elliptical"])
+                    //.domain(function (d) {return d.ClassOfOrbit})
+                    .range(colors);
+    
+    function translateFn(d){
+        
+        return "rotate(" + d.Inclination+ ", 500, 500)"; 
+        
+    }
+    
+  var xScale = d3.scale.linear()
+    .domain([
+    	d3.min([0,d3.min(data,function (d) { return d.major})]),
+    	d3.max([0,d3.max(data,function (d) { return d.major})])
+    	])
+    .range([0,100])
+  var yScale = d3.scale.linear()
+    .domain([
+    	d3.min([0,d3.min(data,function (d) { return d.minor })]),
+    	d3.max([0,d3.max(data,function (d) { return d.minor })])
+    	])
+    .range([100,0])
+	// SVG
+	   svg = d3.select('svg')
+	    .attr('height',h + margin.top + margin.bottom)
+	    .attr('width',w + margin.left + margin.right)
+        .attr("fill", "#636363")
+	    .append('g')
+	    .attr('transform','translate(' + margin.left + ',' + margin.top + ')');
+          
+          
+	
+    console.log(Country);
+  // Circles
+  var ellipse = svg.selectAll('ellipse')
+      .data(data)
+      .enter()
+    .append('ellipse')
+      .attr('cx', 500 )
+      .attr('cy', 500 )
+      .attr('rx', function(d) {return xScale(d.major*0.05)})
+      .attr('ry', function(d) {return yScale(d.minor*0.05)})
+      .attr('transform', translateFn)
+      .attr('stroke',function (d) { return colorScale(d.ClassOfOrbit)})
+      .attr("fill", "none")
+      .attr('stroke-width',.5)
+      .on('mouseover', function () {
+        d3.select(this)
+          .transition()
+          .duration(500)
+          .attr("stroke","black")
+          .attr('stroke-width',5)
+      })
+      .on('mouseout', function () {
+        d3.select(this)
+          .transition()
+          .duration(500)
+          .attr('stroke-width',.5)
+          .attr('stroke',function (d) { return colorScale(d.ClassOfOrbit)})
+      })
+    .append('title') // Tooltip
+      .text(function (d) { return d.NameofSatellite +
+                           '\nEccentricity: ' + d.Eccentricity +
+                           '\nInclination: ' + d.Inclination +
+                         '\nClass of orbit: ' + d.ClassOfOrbit
+                         })
+  
+})
+        
+        
+        
+      
       </script>
   </body>
 </html>

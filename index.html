@@ -45,62 +45,82 @@
     </ul>
 
     <div class="tab-content">
-        <!--tab1 Information-->
+        <!--tab1 Satellite Info-->
         <div id="tab1" class="tab-pane fade in active">
             <!--How satellites revolve-->
-            <!--<div id="motionsvgdiv" class="col-md-12"></div>-->
-            <!--<div id="detailsdiv" class="col-md-3"></div>-->
+            <div id="motionsvgdiv" class="col-md-10"></div>
+            <div class="container col-sm-2" id="infobox"></div>
         </div>
 
 
         <!--tab2  ORBITS-->
         <div id="tab2" class="tab-pane fade">
-            <div class="container col-sm-10" id="radarchart"></div>
-            <div class="container col-sm-2" id="infobox"></div>
-
-            <div id="containerEllipses">
-                <div id="Selection">
+            <div class="row">
+                <br>
+                <div id="Selection" class="col-sm-6 text-right">
                     Select Country:
-                    <select id="Country" onchange="selectCountry()">
+                    <select id="Country" onchange="select()">
                         <option value="USA" selected="selected">USA</option>
                         <option value="Russia" selected="selected">Russia</option>
+                        <option value="China" selected="selected">China</option>
+                        <option value="South Korea" selected="selected">South Korea</option>
+                        <option value="Germany" selected="selected">Germany</option>
                         <option value="India" selected="selected">India</option>
-                        <option value="NR" selected="selected">NR</option>
+                        <option value="Japan" selected="selected">Japan</option>
+                        <option value="Norway" selected="selected">Norway</option>
+                        <option value="All" selected="selected">All</option>
+                    </select>
+                </div>
+                <div id="Selection2" class="col-sm-6 text-left">
+                    Select Users:
+                    <select id="Users" onchange="select()">
+                        <option value="Civil" selected="selected">Civil</option>
+                        <option value="Military" selected="selected">Military</option>
+                        <option value="Commercial" selected="selected">Commercial</option>
+                        <option value="Government" selected="selected">Government</option>
+                        <option value="All" selected="selected">All</option>
+
                     </select>
                 </div>
             </div>
-            <svg id="ellipsesvg"></svg>
 
-            <div class="container col-sm-12" id="zoomableScatter"></div>
-
-
+            <div class="row">
+                <div id="containerEllipses" class="col-sm-8"><svg id="ellipsesvg"></svg></div>
+                <div class="col-sm-4" id="zoomableScatter"></div>
+            </div>
+            <!--<div class="col-sm-5" id="radarchart"></div>-->
         </div>
+
+
+        <!--tab3 Usage and purpose-->
         <div id="tab3" class="tab-pane fade">
             <div class="container col-sm-12">
                 <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a><br>
-                    <a class="dropdown-item" href="#">Another action</a><br>
-                    <a class="dropdown-item" href="#">Something else here</a><br>
-                  </div>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown button
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a><br>
+                        <a class="dropdown-item" href="#">Another action</a><br>
+                        <a class="dropdown-item" href="#">Something else here</a><br>
+                    </div>
                 </div>
 
                 <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a><br>
-                    <a class="dropdown-item" href="#">Another action</a><br>
-                    <a class="dropdown-item" href="#">Something else here</a><br>
-                  </div>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown button
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a><br>
+                        <a class="dropdown-item" href="#">Another action</a><br>
+                        <a class="dropdown-item" href="#">Something else here</a><br>
+                    </div>
                 </div>
             </div>
-            <div class="container col-sm-6"  id="linechart"></div>
-            <div class="container col-sm-6"  id="bar"></div>
+            <div class="container col-sm-6" id="linechart"></div>
+            <div class="container col-sm-6" id="bar"></div>
         </div>
 
     </div>
@@ -108,7 +128,6 @@
 
 
 <!--Our Script files-->
-
 
 
 <script src="js/satellite.js"></script> <!--data-->
@@ -120,8 +139,8 @@
 <script src="js/countryBar2.js" type="text/javascript"></script>
 <script src="js/launchCount.js" type="text/javascript"></script>
 <script src="js/timeSeries.js" type="text/javascript"></script>
-<!--<script src="js/leftmenuhandler.js" type="text/javascript"></script>-->
 <script src="js/ellipses.js" type="text/javascript"></script>
+
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="js/zoomablescatter.js" type="text/javascript"></script>
