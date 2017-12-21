@@ -184,12 +184,6 @@ for (var j = 0; j < satellites.length; j++) {
                 .append('span')
 
                 .append('br');
-<<<<<<< HEAD
-=======
-            // console.log([satellites[j]["NameofSatellite"], ('Purpose: ' + satellites[j]["Purpose"]),
-            //         ('Country: ' + satellites[j]["Country"]),
-            //         ('Class of orbit: ' + satellites[j]["ClassofOrbit"])]);
->>>>>>> c38f33511cc9d0ac41be31b08bcdcc6ca27abc4c
     }
 
 }

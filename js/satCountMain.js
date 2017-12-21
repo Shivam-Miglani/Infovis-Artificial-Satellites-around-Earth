@@ -1120,7 +1120,13 @@ var sc = [{
 	"User": "Government/Commercial",
 	"launchYear": 2017,
 	"Count": 6
-},  {
+}, {
+	"Country": "NR (10/17)",
+	"Purpose": "Earth Science",
+	"User": "Civil",
+	"launchYear": 2005,
+	"Count": 1
+}, {
 	"Country": "Russia",
 	"Purpose": "Communications",
 	"User": "Military",
@@ -1132,7 +1138,13 @@ var sc = [{
 	"User": "Government",
 	"launchYear": 2013,
 	"Count": 3
-},  {
+}, {
+	"Country": "Canada",
+	"Purpose": "Space Observation",
+	"User": "Military",
+	"launchYear": 2013,
+	"Count": 1
+}, {
 	"Country": "NR",
 	"Purpose": "Earth Observation",
 	"User": "Government",
