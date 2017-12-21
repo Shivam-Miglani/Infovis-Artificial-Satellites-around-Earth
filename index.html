@@ -57,27 +57,27 @@
         <div id="tab2" class="tab-pane fade">
             <div class="row">
                 <br>
-                <div id="Selection" class="col-sm-6 text-right">
+                <div id="Selection1" class="col-sm-6 text-right">
                     Select Country:
                     <select id="Country" onchange="select()">
-                        <option value="USA" selected="selected">USA</option>
-                        <option value="Russia" selected="selected">Russia</option>
-                        <option value="China" selected="selected">China</option>
-                        <option value="South Korea" selected="selected">South Korea</option>
-                        <option value="Germany" selected="selected">Germany</option>
-                        <option value="India" selected="selected">India</option>
-                        <option value="Japan" selected="selected">Japan</option>
-                        <option value="Norway" selected="selected">Norway</option>
+                        <option value="USA" >USA</option>
+                        <option value="Russia" >Russia</option>
+                        <option value="China" >China</option>
+                        <option value="South Korea" >South Korea</option>
+                        <option value="Germany" >Germany</option>
+                        <option value="India" >India</option>
+                        <option value="Japan" >Japan</option>
+                        <option value="Norway" >Norway</option>
                         <option value="All" selected="selected">All</option>
                     </select>
                 </div>
                 <div id="Selection2" class="col-sm-6 text-left">
                     Select Users:
                     <select id="Users" onchange="select()">
-                        <option value="Civil" selected="selected">Civil</option>
-                        <option value="Military" selected="selected">Military</option>
-                        <option value="Commercial" selected="selected">Commercial</option>
-                        <option value="Government" selected="selected">Government</option>
+                        <option value="Civil" >Civil</option>
+                        <option value="Military" >Military</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Government">Government</option>
                         <option value="All" selected="selected">All</option>
 
                     </select>
@@ -88,7 +88,9 @@
                 <div id="containerEllipses" class="col-sm-8">
                     <svg id="ellipsesvg"></svg>
                 </div>
-                <div class="col-sm-4" id="zoomableScatter"></div>
+                <div class="col-sm-4" id="zoomableScatter">
+                    <svg id="scattersvg"></svg>
+                </div>
             </div>
             <!--<div class="col-sm-5" id="radarchart"></div>-->
         </div>

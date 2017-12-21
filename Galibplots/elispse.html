@@ -12,24 +12,24 @@
       <div id="Selection1">
         Select Country:
           <select id = "Country" onchange="select()">
-            <option value ="USA" selected="selected">USA</option>
-            <option value ="Russia" selected="selected">Russia</option>
-              <option value ="China" selected="selected">China</option>
-              <option value ="South Korea" selected="selected">South Korea</option>
-              <option value ="Germany" selected="selected">Germany</option>
-              <option value ="India" selected="selected">India</option>
-              <option value ="Japan" selected="selected">Japan</option>
-              <option value ="Norway" selected="selected">Norway</option>
+            <option value ="USA">USA</option>
+            <option value ="Russia" >Russia</option>
+              <option value ="China" >China</option>
+              <option value ="South Korea" >South Korea</option>
+              <option value ="Germany" >Germany</option>
+              <option value ="India" >India</option>
+              <option value ="Japan" >Japan</option>
+              <option value ="Norway" >Norway</option>
               <option value ="All" selected="selected">All</option>
           </select>
         </div>
         <div id="Selection2">
         Select Users:
           <select id = "Users" onchange="select()">
-          <option value ="Civil" selected="selected">Civil</option>
-            <option value ="Military" selected="selected">Military</option>
-              <option value ="Commercial" selected="selected">Commercial</option>
-              <option value ="Government" selected="selected">Government</option>
+          <option value ="Civil" >Civil</option>
+            <option value ="Military" >Military</option>
+              <option value ="Commercial" >Commercial</option>
+              <option value ="Government" >Government</option>
               <option value ="All" selected="selected">All</option>
               
           </select>
@@ -41,29 +41,21 @@
     
     <script>
         
+        start();
         
+        var Country,Users;
         
         function select(){
             var Country = document.getElementById("Country").value;
             var Users = document.getElementById("Users").value;
-            if(Country=="All" && Users=="All"){location.reload()}
-            console.log(Country);
-            console.log(Users);
+            if(Country=="All" && Users=="All"){start()}
+            else{
             update(Country , Users);
+            }
         }
         
         
-        function selectCountry(){
-            var Country = document.getElementById("Country").value;
-            var Users = document.getElementById("Users").value;
-            update(Country , Users);
-        }
-        function selectUsers(){
-            var Users = document.getElementById("Users").value;
-            var Country = document.getElementById("Country").value;
-            console.log(Users);
-            update(Country, Users);
-        }
+        
     function update(Country, Users){    
       d3.csv('data.csv', function (data) {
   // Variables
@@ -126,11 +118,13 @@
       .attr('rx', function(d) {if (d.Country==Country && d.Users==Users){return xScale(d.major*0.05)}
                               else if(Country=="All") {if(d.Users==Users){return xScale(d.major*0.05)}}
                               //else if(Country=="All" && Users=="All"){return xScale(d.major*0.05)}
-                              else if(Users=="All") {if(d.Country==Country){return xScale(d.major*0.05)}}})
+                              else if(Users=="All") {if(d.Country==Country){return xScale(d.major*0.05)}}
+                              else{return xScale(d.major*0.05)}})
       .attr('ry', function(d) {if (d.Country==Country && d.Users==Users){return yScale(d.minor*0.05)}
                               else if(Country=="All"){if(d.Users==Users){return yScale(d.minor*0.05)}}
                               //else if(Country=="All" && Users=="All"){return yScale(d.minor*0.05)}
-                              else if(Users=="All"){if(d.Country==Country){return yScale(d.minor*0.05)}}})
+                              else if(Users=="All"){if(d.Country==Country){return yScale(d.minor*0.05)}}
+                              else{return yScale(d.minor)}})
       .attr('transform', translateFn)
       .attr('stroke',function (d) { return colorScale(d.ClassOfOrbit)})
       .attr("fill", "none")
@@ -159,7 +153,7 @@
 })
             
         }
-        
+        function start(){
         d3.csv('data.csv', function (data) {
   // Variables
     console.log("data loaded!")
@@ -246,7 +240,7 @@
                          })
   
 })
-        
+        }
         
         
       
