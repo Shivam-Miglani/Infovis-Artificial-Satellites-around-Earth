@@ -19,9 +19,9 @@ d3.csv('data_ellipse.csv', function (data) {
     svg = d3.select("#scattersvg")
             .selectAll("g").remove();
 
-     margin = { top: 20, right: 20, bottom: 30, left: 30 };
-    width = 900 - margin.left - margin.right,
-        height = 480 - margin.top - margin.bottom;
+     margin = { top: 50, right: 20, bottom: 30, left: 30 };
+    width = 600 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
      colors = ["blue", "green", "red", "black"]
      colorScale = d3.scaleOrdinal()
@@ -144,7 +144,7 @@ d3.csv('data_ellipse.csv', function (data) {
     svg.append("text")
         .style("text-anchor", "end")
         .attr("x", width)
-        .attr("y", height - 8)
+        .attr("y", height - 28)
         .text("Inclination");
 
     // y axis
@@ -205,15 +205,16 @@ d3.csv('data_ellipse.csv', function (data) {
 }
 
 function start(){
+    start1();
     
     d3.csv('data_ellipse.csv', function (data) {
 
         svg = d3.select("#scattersvg")
 
-     margin = { top: 20, right: 20, bottom: 30, left: 30 };
-    width = 900 - margin.left - margin.right,
-        height = 480 - margin.top - margin.bottom;
-
+     margin = { top: 50, right: 20, bottom: 30, left: 30 };
+    width = 600 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+        
      colors = ["blue", "green", "red", "black"]
      colorScale = d3.scaleOrdinal()
         .domain(["LEO", "MEO", "GEO", "Elliptical"])
@@ -331,7 +332,7 @@ function start(){
     svg.append("text")
         .style("text-anchor", "end")
         .attr("x", width)
-        .attr("y", height - 8)
+        .attr("y", height - 28)
         .text("Inclination");
 
     // y axis
