@@ -1,18 +1,23 @@
+//Initial drawing with All Country and All Users
 start();
-        
-var margin, width,height,colors, colorScale,x,y,tooltip,xAxis,yAxis,svg,clip,scatter,brush,idleTimeout,idleDelay, Country,Users;
 
+//Declaring variables
+var margin, width, height, colors, colorScale, x, y, tooltip, xAxis, yAxis, svg, clip, scatter, brush, idleTimeout, idleDelay, Country, Users;
+
+//Select function that selects Country and Users from HTML drop-down
 function select(){
             var Country = document.getElementById("Country").value;
             var Users = document.getElementById("Users").value;
             
             
-            if(Country=="All" && Users=="All"){start()}
+            if(Country=="All" && Users=="All"){start()} //calls the initial overview drawing
             else{
-            update(Country , Users);
+            update(Country , Users); //updates the drawing according to the selection
                 select1();
             }
         }
+
+//Update function
 function update(Country,Users){
 d3.csv('data_ellipse.csv', function (data) {
 
@@ -20,14 +25,15 @@ d3.csv('data_ellipse.csv', function (data) {
             .selectAll("g").remove();
 
      margin = { top: 50, right: 20, bottom: 30, left: 30 };
-    width = 600 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+     width = 600 - margin.left - margin.right,
+     height = 400 - margin.top - margin.bottom;
 
      colors = ["blue", "green", "red", "black"]
      colorScale = d3.scaleOrdinal()
         .domain(["LEO", "MEO", "GEO", "Elliptical"])
-        //.domain(function (d) {return d.ClassOfOrbit})
         .range(colors);
+    
+    //X-Scale
 
      x = d3.scaleLinear()
         .domain([
@@ -37,6 +43,7 @@ d3.csv('data_ellipse.csv', function (data) {
         .range([0, width])
         .nice();
 
+    //Y-Scale
      y = d3.scaleLinear()
         .domain([
             d3.min([0,d3.min(data,function (d) { return d.ecc })]),
@@ -50,22 +57,20 @@ d3.csv('data_ellipse.csv', function (data) {
         .style("opacity", 0);
 
 
-
-     xAxis = d3.axisBottom(x).ticks(12)
+    //Defining Axes
+        xAxis = d3.axisBottom(x).ticks(12)
         yAxis = d3.axisLeft(y).ticks(12 * height / width);
 
 
-    //var brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended)
-    //.on("start", function(){d3.select("scatter").call(brush)}),
-    //  idleTimeout=100,
-    //idleDelay = 350;
+    //Selecting the SVG in HTML
 
      svg = d3.select("#scattersvg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+    
+    //clip definition
      clip = svg.append("defs").append("svg:clipPath")
         .attr("id", "clip")
         .append("svg:rect")
@@ -74,27 +79,23 @@ d3.csv('data_ellipse.csv', function (data) {
         .attr("x", 0)
         .attr("y", 0);
 
-    //var xExtent = d3.extent(data, function (d) { return d.x; });
-    //var yExtent = d3.extent(data, function (d) { return d.y; });
-    //x.domain(d3.extent(data, function (d) { return d.x; })).nice();
-    //y.domain(d3.extent(data, function (d) { return d.y; })).nice();
 
-
-
-
+    //Scatter plot field
      scatter = svg.append("g")
         .attr("id", "scatterplot")
         .attr("clip-path", "url(#clip)");
 
+    //brush
      brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended),
-        //.on("start", function(){d3.select("scatter").call(brush)}),
-        idleTimeout,
-        idleDelay = 350;
+     idleTimeout,
+     idleDelay = 350;
 
+    //Initializing the zoom brush
     scatter.append("g")
         .attr("class", "brush")
         .call(brush)
 
+    //Drawing datapoints
     scatter.selectAll(".dot")
         .data(data)
         .enter().append("circle")
@@ -109,7 +110,7 @@ d3.csv('data_ellipse.csv', function (data) {
         .attr("opacity", 0.5)
         .style("fill", function (d) { return colorScale(d.ClassOfOrbit)})
         .on('mouseover', function () {
-            //scatter.select(".brush").call(brush.move, null);
+            
             d3.select(this)
                 .transition()
                 .duration(500)
@@ -118,14 +119,14 @@ d3.csv('data_ellipse.csv', function (data) {
                 .attr('stroke', 'black')
         })
         .on('mouseout', function () {
-            //scatter.select(".brush").call(brush);
+            
             d3.select(this)
                 .transition()
                 .duration(500)
                 .attr('r',4)
 
         })
-        .append('title') // Tooltip
+        .append('title') // Appending Tooltip 
         .text(function (d) { return d.NameofSatellite +
             '\nEccentricity: ' + d.Eccentricity +
             '\nInclination: ' + d.Inclination +
@@ -134,7 +135,7 @@ d3.csv('data_ellipse.csv', function (data) {
 
 
 
-    // x axis
+    // x axis call
     svg.append("g")
         .attr("class", "x axis")
         .attr('id', "axis--x")
@@ -147,7 +148,7 @@ d3.csv('data_ellipse.csv', function (data) {
         .attr("y", height - 28)
         .text("Inclination");
 
-    // y axis
+    // y axis call
     svg.append("g")
         .attr("class", "y axis")
         .attr('id', "axis--y")
@@ -161,11 +162,8 @@ d3.csv('data_ellipse.csv', function (data) {
         .text("Eccentricity");
 
 
-    //scatter.append("g")
-    //.attr("class", "brush")
-    //.call(brush);
 
-
+    //End of brush
     function brushended() {
 
         var s = d3.event.selection;
@@ -180,13 +178,14 @@ d3.csv('data_ellipse.csv', function (data) {
             scatter.select(".brush").call(brush.move, null);
         }
         zoom();
-        //console.log("zoomed")
+    
     }
 
     function idled() {
         idleTimeout = null;
     }
 
+    //function for zooming
     function zoom() {
 
         var t = scatter.transition().duration(750);
@@ -199,26 +198,26 @@ d3.csv('data_ellipse.csv', function (data) {
             .attr("cy", function (d) { if (d.Country==Country && d.Users==Users){return y(d.ecc)}
                               else if(Country=="All") {if(d.Users==Users){return y(d.ecc)}}
                               else if(Users=="All") {if(d.Country==Country){return y(d.ecc)}}});
-        //console.log("zoomed22")
+        
     }
 })
 }
 
+//this function is exactly identical to the update function but this draws all the datapoints 
 function start(){
     start1();
     
     d3.csv('data_ellipse.csv', function (data) {
 
-        svg = d3.select("#scattersvg")
+    svg = d3.select("#scattersvg")
 
-     margin = { top: 50, right: 20, bottom: 30, left: 30 };
+    margin = { top: 50, right: 20, bottom: 30, left: 30 };
     width = 600 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+    height = 400 - margin.top - margin.bottom;
         
      colors = ["blue", "green", "red", "black"]
      colorScale = d3.scaleOrdinal()
         .domain(["LEO", "MEO", "GEO", "Elliptical"])
-        //.domain(function (d) {return d.ClassOfOrbit})
         .range(colors);
 
      x = d3.scaleLinear()
@@ -244,13 +243,8 @@ function start(){
 
 
      xAxis = d3.axisBottom(x).ticks(12)
-        yAxis = d3.axisLeft(y).ticks(12 * height / width);
+     yAxis = d3.axisLeft(y).ticks(12 * height / width);
 
-
-    //var brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended)
-    //.on("start", function(){d3.select("scatter").call(brush)}),
-    //  idleTimeout=100,
-    //idleDelay = 350;
 
      svg = d3.select("#scattersvg")
         .attr("width", width + margin.left + margin.right)
@@ -266,12 +260,6 @@ function start(){
         .attr("x", 0)
         .attr("y", 0);
 
-    //var xExtent = d3.extent(data, function (d) { return d.x; });
-    //var yExtent = d3.extent(data, function (d) { return d.y; });
-    //x.domain(d3.extent(data, function (d) { return d.x; })).nice();
-    //y.domain(d3.extent(data, function (d) { return d.y; })).nice();
-
-
 
 
      scatter = svg.append("g")
@@ -279,7 +267,6 @@ function start(){
         .attr("clip-path", "url(#clip)");
 
      brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended),
-        //.on("start", function(){d3.select("scatter").call(brush)}),
         idleTimeout,
         idleDelay = 350;
 
@@ -297,7 +284,7 @@ function start(){
         .attr("opacity", 0.5)
         .style("fill", function (d) { return colorScale(d.ClassOfOrbit)})
         .on('mouseover', function () {
-            //scatter.select(".brush").call(brush.move, null);
+            
             d3.select(this)
                 .transition()
                 .duration(500)
@@ -306,7 +293,7 @@ function start(){
                 .attr('stroke', 'black')
         })
         .on('mouseout', function () {
-            //scatter.select(".brush").call(brush);
+            
             d3.select(this)
                 .transition()
                 .duration(500)
@@ -349,9 +336,6 @@ function start(){
         .text("Eccentricity");
 
 
-    //scatter.append("g")
-    //.attr("class", "brush")
-    //.call(brush);
 
 
     function brushended() {
@@ -368,7 +352,7 @@ function start(){
             scatter.select(".brush").call(brush.move, null);
         }
         zoom();
-        //console.log("zoomed")
+        
     }
 
     function idled() {
@@ -383,7 +367,7 @@ function start(){
         scatter.selectAll("circle").transition(t)
             .attr("cx", function (d) { return x(d.Inclination); })
             .attr("cy", function (d) { return y(d.ecc); });
-        //console.log("zoomed22")
+        
     }
 })
     
