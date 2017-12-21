@@ -24,10 +24,10 @@ var resolution = 5, //perhaps make slider?
     phi = 0, //rotation of ellipses
     radiusSizer = 10, //Size increaser of radii of satellites
     planetOpacity = 0.6;
-scalingFactor = 0.01;
+    scalingFactor = 0.01;
 
 //Create SVG
-var svg = d3.select("#planetarium").append("svg")
+var svg = d3.select("#t1svg").append("svg")
     .attr("width", x)
     .attr("height", y);
 
@@ -208,18 +208,6 @@ d3.select("#remove")
         resetEvents();
     });
 
-//Switch between different gradient options
-d3.select("#color")
-    .on("click", function(e) {
-        gradientChoice = (gradientChoice == "Rainbow") ? "Temp" : "Rainbow";
-
-        svg.selectAll(".planet")
-            .transition()
-            .style("fill", function(d){
-                if (gradientChoice == "Temp") {return "url(#gradientRadial-" + d.ID + ")";}
-                else if (gradientChoice == "Rainbow") {return "url(#gradientLinear)";}
-            })
-    });
 
 //Scale satellites accordingly
 var scale = false;

@@ -6,7 +6,6 @@ start1();
 function select1(){
     var Country = document.getElementById("Country").value;
     var Users = document.getElementById("Users").value;
-    console.log("kuttamara")
     if(Country=="All" && Users=="All"){start1()}
     else{
         update1(Country , Users);

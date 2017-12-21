@@ -2,7 +2,11 @@ body {
     font-size: 14px;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     cursor: default;
-    background:lightyellow;
+
+}
+
+#tab1{
+    background-color: #292929;
 }
 
 h4,h5{
@@ -29,27 +33,6 @@ span {
     opacity: 0.3;
 }
 
-body {
-    font-size: 14px;
-    font-weight: 400;
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    vertical-align: middle;
-    cursor: default;
-}
-
-.bigButton {
-    font-family: Oswald;
-    font-size: 18px;
-    font-weight: 300;
-    color: white;
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid;
-    border-color: white;
-    cursor: pointer;
-    visibility: auto;
-}
 
 #start {
     top: 200px;
@@ -74,40 +57,7 @@ span {
     vertical-align:middle
 }
 
-#buttonWrapper{
-    z-index: 1;
-    display: block;
-    font-family: Oswald;
-    font-size: 14px;
-    font-weight: 300;
-    color: white;
-    position: absolute;
-    left: 18px;
-    bottom: 18px;
-    width: 640px;
-    text-align: center;
-    overflow: hidden;
-    visibility: auto;
-}
 
-.sideButton {
-    float: left;
-    cursor: pointer;
-    width: 80px;
-}
-
-.sideButton a {
-    text-decoration: none;
-    color: white;
-}
-
-.sideButtonInv {
-    float: left;
-    cursor: pointer;
-    width: 80px;
-    opacity: 0;
-    cursor: pointer;
-}
 
 .bar {
     float: left;
@@ -162,20 +112,6 @@ span {
     text-anchor: middle;
 }
 
-.legend {
-    font-size: 11px;
-    font-weight: 300;
-    color: white;
-    fill: white;
-}
-
-.legendTitle {
-    font-family: Oswald;
-    font-size: 14px;
-    font-weight: 300;
-    color: white;
-    fill: white;
-}
 
 .progressWrapper {
     cursor: pointer;

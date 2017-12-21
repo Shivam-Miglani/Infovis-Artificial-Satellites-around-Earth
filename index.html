@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="css/circles.css">
     <link rel="stylesheet" href="css/countryBar.css">
     <link rel="stylesheet" href="css/timeSeriesLine.css">
+    <link rel="stylesheet" href="css/tooltip.css">
+    <link rel="stylesheet" href="css/infoBox.css">
 
     <!--d3-->
     <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -48,8 +50,9 @@
         <!--tab1 Satellite Info-->
         <div id="tab1" class="tab-pane fade in active">
             <!--How satellites revolve-->
-             <!--<div id="svg" class="col-md-10"></div>-->
-            <!--<div class="container col-sm-2" id="infobox"></div>-->
+             <div id="t1svg" class="col-md-10"></div>
+            <!-- Show how to close tooltip -->
+            <div id="tooltipInfo" class="col-md-2"><span>Click anywhere in the screen to close tooltips</span></div>
         </div>
 
         <!--tab2  ORBITS-->
@@ -157,10 +160,11 @@
 
 
 <script src="js/satellite.js"></script> <!--data-->
-<!--<script src="js/main.js"></script> &lt;!&ndash;moving satellites&ndash;&gt;-->
 <script src="js/helper_function.js"></script> <!--helps in moving satellites-->
 <script src="js/showTooltip.js"></script>
 <script src="js/gradients.js"></script>
+<script src="js/main.js"></script> <!--moving satellites-->
+
 
 
 
