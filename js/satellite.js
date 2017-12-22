@@ -1,4 +1,4 @@
-var satellites=[
+var satellites= [
     {
         "NameofSatellite": "Aalto-1",
         "Country": "NR (10/17)",
@@ -20563,8 +20563,8 @@ var satellites=[
         "Eccentricity": 0.00126,
         "Inclinationdegrees": 65.02,
         "Periodminutes": 92.57,
-        "Radius": 0.0385,
-        "LaunchMass": 385,
+        "Radius": 0.385,
+        "LaunchMass": 3850,
         "DateofLaunch": "27/02/2014",
         "ExpectedLifetime": "null",
         "LaunchSite": "Tanegashima Space Center",
@@ -44167,8 +44167,8 @@ var satellites=[
         "Eccentricity": 0.0000743,
         "Inclinationdegrees": 42.8,
         "Periodminutes": 91.8,
-        "Radius": 0.03,
-        "LaunchMass": 300,
+        "Radius": 0.8506,
+        "LaunchMass": 8506,
         "DateofLaunch": "29/09/2011",
         "ExpectedLifetime": "2 yrs.",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -44195,8 +44195,8 @@ var satellites=[
         "Eccentricity": 0.00117,
         "Inclinationdegrees": 97.4,
         "Periodminutes": 94.5,
-        "Radius": 0.025,
-        "LaunchMass": 250,
+        "Radius": 0.25,
+        "LaunchMass": 2500,
         "DateofLaunch": "24/08/2010",
         "ExpectedLifetime": "null",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -44223,8 +44223,8 @@ var satellites=[
         "Eccentricity": 0.00146,
         "Inclinationdegrees": 97.4,
         "Periodminutes": 94.5,
-        "Radius": 0.025,
-        "LaunchMass": 250,
+        "Radius": 0.25,
+        "LaunchMass": 2500,
         "DateofLaunch": "06/05/2012",
         "ExpectedLifetime": "null",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -44251,8 +44251,8 @@ var satellites=[
         "Eccentricity": 0.000801,
         "Inclinationdegrees": 97.36,
         "Periodminutes": 94.5,
-        "Radius": 0.025,
-        "LaunchMass": 250,
+        "Radius": 0.25,
+        "LaunchMass": 2500,
         "DateofLaunch": "26/10/2015",
         "ExpectedLifetime": "null",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -44279,8 +44279,8 @@ var satellites=[
         "Eccentricity": 0.00163,
         "Inclinationdegrees": 96.9,
         "Periodminutes": 92.4,
-        "Radius": 0.024,
-        "LaunchMass": 240,
+        "Radius": 0.24,
+        "LaunchMass": 2400,
         "DateofLaunch": "02/03/2017",
         "ExpectedLifetime": "null",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -46295,8 +46295,8 @@ var satellites=[
         "Eccentricity": 0.00119,
         "Inclinationdegrees": 38,
         "Periodminutes": 90.83,
-        "Radius": 0.04,
-        "LaunchMass": 400,
+        "Radius": 0.499,
+        "LaunchMass": 4990,
         "DateofLaunch": "20/05/2015",
         "ExpectedLifetime": "null",
         "LaunchSite": "Cape Canaveral",
@@ -48663,7 +48663,30 @@ var satellites=[
         "cy": 0,
         "r": 493.5
     }
-]
+];
+
+
+var Purpose = document.getElementById("Purpose").value;
+var Users1 = document.getElementById("Users1").value;
+
+var scByCountry1 = d3.nest()
+    .key(function(d) { if (d.Purpose==Purpose && d.Users==Users1){return d.Country; }
+                     else if (d.Purpose==Purpose && d.Users=="All"){return d.Country;}
+                     else if(d.Purpose=="All" && d.Users==Users1){return d.Country;}})
+    .rollup(function(v){
+        return v.length })
+    .entries(satellites);
+ var scByCountry2 = scByCountry1.slice(1);
+//console.log("hagu"+scByCountry);
+
+var scByLaunchYear1 = d3.nest()
+    .key(function(d) {if (d.Purpose==Purpose && d.Users==Users1){return d.DateofLaunch.split("/").pop(); }
+                     else if(Users1=="All"){if (d.Purpose==Purpose){return d.DateofLaunch.split("/").pop();}}
+                     else if(Purpose=="All"){if (d.Users==Users1){return d.DateofLaunch.split("/").pop();}}})
+    .rollup(function(v){ return v.length; })
+    .entries(satellites)
+    .sort(function(a, b){ return d3.ascending(+a.key, +b.key); });
+
 
 
 var scByCountry = d3.nest()
@@ -48672,7 +48695,7 @@ var scByCountry = d3.nest()
         if(v.length>10) return v.length; else return 0; })
     .entries(satellites);
 
-//console.log(scByCountry);
+//console.log("hagu"+scByCountry);
 
 var scByLaunchYear = d3.nest()
     .key(function(d) { return d.DateofLaunch.split("/").pop();})
@@ -48680,4 +48703,32 @@ var scByLaunchYear = d3.nest()
     .entries(satellites)
     .sort(function(a, b){ return d3.ascending(+a.key, +b.key); });
 
-//console.log(scByLaunchYear);
+
+//console.log("pasa"+scByLaunchYear);
+
+
+var scByPurpose = d3.nest()
+    .key(function(d) { return d.Purpose.split("/").pop();})
+    .rollup(function(v){ return v.length; })
+    .entries(satellites)
+    .sort(function(a, b){ return d3.ascending(+a.key, +b.key); });
+
+//console.log(scByPurpose[0].key+ " " + scByPurpose[0].value);
+//console.log(scByPurpose[1].key+ " " + scByPurpose[1].value);
+//console.log(scByPurpose[2].key + " " + scByPurpose[2].value );
+
+var scByUsers = d3.nest()
+    .key(function(d) { return d.Users;})
+    .rollup(function(v){ return v.length; })
+    .entries(satellites)
+    .sort(function(a, b){ return d3.ascending(+a.key, +b.key); });
+
+//console.log(JSON.stringify(scByCountry));
+//console.log(JSON.stringify(scByCountry1));
+//console.log(JSON.stringify(scByCountry2));
+//console.log(JSON.stringify(scByLaunchYear1));
+//console.log(JSON.stringify(scByLaunchYear));
+//console.log(scByUsers[1].key+ " " + scByUsers[1].value);
+//console.log(scByUsers[2].key+ " " + scByUsers[2].value);
+//console.log(scByUsers[3].key+ " " + scByUsers[3].value);
+
