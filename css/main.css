@@ -1,17 +1,7 @@
 body {
     font-size: 14px;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     cursor: default;
-
-}
-
-#tab1{
-    background-color: #292929;
-
-}
-
-#tab3{
-
 }
 
 h4,h5{
@@ -19,25 +9,15 @@ h4,h5{
     vertical-align:center;
 }
 
-span {
-    display:inline-block;
-    vertical-align:middle
-}
-
-
-.bar {
-    float: left;
-    width: 15px;
-}
-
-#color {
-    visibility: hidden;
-}
-
 .earth{
     opacity: 0.3;
 }
 
+[class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
 
 #start {
     top: 200px;
@@ -47,23 +27,12 @@ span {
     position: absolute;
 }
 
-#crazy {
-    position: absolute;
-    top: 300px;
-    left: 200px;
-    height: 33px;
-    width: 112px;
-    visibility: hidden;
-    opacity: 0;
-}
 
-span {
-    display:inline-block;
-    vertical-align:middle
-}
+
 select {
     display: block;
 }
+
 .bar {
     fill: purple;
     opacity: 0.8;
@@ -77,9 +46,6 @@ select {
 }
 
 
-#color {
-    visibility: hidden;
-}
 
 #tooltipInfo {
     position: absolute;
@@ -90,17 +56,6 @@ select {
     visibility: hidden;
 }
 
-#name {
-    position: absolute;
-    right: 10px;
-    bottom: 5px;
-    font-size: 10px;
-    color: white;
-}
-#name a {
-    text-decoration: none;
-    color: #CCCCCC;
-}
 
 
 .explanation {
@@ -111,24 +66,7 @@ select {
     text-anchor: middle;
 }
 
-.bar {
-    fill: steelblue;
-}
 
-.bar:hover {
-    fill: orange;
-}
-
-.axis {
-    font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
 
 
 

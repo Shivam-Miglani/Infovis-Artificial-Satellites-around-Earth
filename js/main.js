@@ -19,58 +19,54 @@ var stopTooltip = false;
 var resolution = 5, //perhaps make slider?
     speedUp = 400000,
     au = 149597871, //km
-    radiusSun = 695800, //km
-    radiusJupiter = 69911, //km
     phi = 0, //rotation of ellipses
-    radiusSizer = 10, //Size increaser of radii of satellites
+    radiusSizer = 10, //increaser of radii of satellites
     planetOpacity = 0.6;
     scalingFactor = 0.01;
 
 //Create SVG
-var svg = d3.select("#t1svg").append("svg")
+var svg = d3.select("#svg").append("svg")
     .attr("width", x)
     .attr("height", y);
 
 
 //Create a container for everything with the centre in the middle
 var container = svg.append("g").attr("class","container")
-    .attr("transform", "translate(" + x/2 + "," + y/2 + ")")
+    .attr("transform", "translate(" + x/2 + "," + y/2 + ")");
 
-//Create star in the Middle - scaled to the orbits
-//Radius of our Sun in these coordinates (taking into account size of circle inside image)
-var ImageWidth = radiusSun/au * 3000 * (2.7/1.5);
+
+
+//Earth in middle
+var ImageWidth = "20px";
 container.
 append("svg:image")
     .attr("x", -ImageWidth)
     .attr("y", -ImageWidth)
-    .attr("class", "sun")
+    .attr("class", "earth")
     .attr("xlink:href", "img/earth.png")
     .attr("width", ImageWidth*2)
     .attr("height", ImageWidth*2)
     .attr("text-anchor", "middle");
 
-//d3.json("exoplanets.json", function(error, satellites) {
-
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////////// Create Scales ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-//Create color gradient for satellites based on the temperature of the star that they orbit
+//Create color gradient for satellites
 var colors = ["#FB1108","#FD150B","#FA7806","#FBE426","#FCFB8F","#F3F5E7","#C7E4EA","#ABD6E6","#9AD2E1","#42A1C1","#1C5FA5", "#172484"];
 var colorScale = d3.scale.linear()
-    .domain([2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 14000, 20000, 30000]) // Temperatures
+    .domain([2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 14000, 20000, 30000])
     .range(colors);
 
-//Set scale for radius of circles
+//Set scale for radius according to launch mass of satellites of circles
 var rScale = d3.scale.linear()
     .range([1, 20])
-    .domain([0, d3.max(satellites, function(d) { return d.Radius; })]);
+    .domain([0, d3.max(satellites, function(d) { return d.LaunchMass*0.001; })]);
 
 //Format with 2 decimals
 var formatSI = d3.format(".2f");
 
-//Create the gradients for the planet fill
-var gradientChoice = "Temp";
+//Creating gradients to color up satellites
 createGradients();
 
 ///////////////////////////////////////////////////////////////////////////
@@ -160,29 +156,29 @@ d3.select("#remove")
 
 
 //Scale satellites accordingly
-var scale = false;
-d3.select("#scale")
-    .on("click", function(e) {
-
-        if (scale == false) {
-            d3.select("#scale").text("unscale satellites");
-
-            d3.selectAll(".planet")
-                .transition().duration(2000)
-                .attr("r", function(d) {
-                    var newRadius = radiusJupiter/au*3000*d.Radius;
-                    if  (newRadius < 1) {return 0;}
-                    else {return newRadius;}
-                });
-
-            scale = true;
-        } else if (scale == true) {
-            d3.select("#scale").text("scale satellites");
-
-            d3.selectAll(".planet")
-                .transition().duration(2000)
-                .attr("r", function(d) {return radiusSizer * d.Radius;});
-
-            scale = false;
-        }//else if
-    });
+// var scale = false;
+// d3.select("#scale")
+//     .on("click", function(e) {
+//
+//         if (scale == false) {
+//             d3.select("#scale").text("unscale satellites");
+//
+//             d3.selectAll(".planet")
+//                 .transition().duration(2000)
+//                 .attr("r", function(d) {
+//                     var newRadius = radiusJupiter/au*3000*d.Radius;
+//                     if  (newRadius < 1) {return 0;}
+//                     else {return newRadius;}
+//                 });
+//
+//             scale = true;
+//         } else if (scale == true) {
+//             d3.select("#scale").text("scale satellites");
+//
+//             d3.selectAll(".planet")
+//                 .transition().duration(2000)
+//                 .attr("r", function(d) {return radiusSizer * d.Radius;});
+//
+//             scale = false;
+//         }//else if
+//     });

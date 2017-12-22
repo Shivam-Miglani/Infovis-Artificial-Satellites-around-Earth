@@ -4,14 +4,9 @@ function showTooltip(d) {
     //Show how to close tooltip
     d3.select("#tooltipInfo").style("visibility", "visible");
 
-    //Make a different offset for really small satellites
-    //var Offset = (rScale(d.Radius)/2 < 2) ? 3 : rScale(d.Radius)/2;
-    var xOffset = ((10*d.Radius)/2 < 3) ? 6 : (10*d.Radius)/2;
-    var yOffset = ((10*d.Radius)/2 < 3) ? 0 : (10*d.Radius)/2;
-
     //Set first location of tooltip and change opacity
-    var xpos = d.x + x/2 - xOffset + 3;
-    var ypos = d.y + y/2 - yOffset - 5;
+    var xpos = 100;
+    var ypos = 100;
 
     d3.select("#tooltip")
         .style('top',ypos+"px")
@@ -19,17 +14,9 @@ function showTooltip(d) {
         .transition().duration(500)
         .style('opacity',1);
 
-    //Keep the tooltip moving with the planet, until stopTooltip
+
     //returns true (when the user clicks)
     d3.timer(function() {
-        xpos = d.x + x/2 - xOffset + 3;
-        ypos = d.y + y/2 - yOffset - 5;
-
-        //Keep changing the location of the tooltip
-        d3.select("#tooltip")
-            .style('top',ypos+"px")
-            .style('left',xpos+"px");
-
         //Breaks from the timer function when stopTooltip is changed to true
         //by another function
         if (stopTooltip == true) {

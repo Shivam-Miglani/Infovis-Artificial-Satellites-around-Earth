@@ -48672,7 +48672,7 @@ var scByCountry = d3.nest()
         if(v.length>10) return v.length; else return 0; })
     .entries(satellites);
 
-console.log(scByCountry);
+//console.log(scByCountry);
 
 var scByLaunchYear = d3.nest()
     .key(function(d) { return d.DateofLaunch.split("/").pop();})
@@ -48680,4 +48680,4 @@ var scByLaunchYear = d3.nest()
     .entries(satellites)
     .sort(function(a, b){ return d3.ascending(+a.key, +b.key); });
 
-console.log(scByLaunchYear);
+//console.log(scByLaunchYear);

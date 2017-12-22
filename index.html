@@ -12,12 +12,8 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!--css-->
-    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css"/>
-    <link rel="stylesheet" href="css/leftMenu.css">
     <link rel="stylesheet" href="css/circles.css">
-    <link rel="stylesheet" href="css/countryBar.css">
-    <link rel="stylesheet" href="css/timeSeriesLine.css">
     <link rel="stylesheet" href="css/tooltip.css">
     <link rel="stylesheet" href="css/infoBox.css">
 
@@ -31,7 +27,7 @@
 </head>
 
 
-<body>
+<body class="bg-dark">
 
 
 <!--tabbed menu-->
@@ -48,67 +44,70 @@
     <div class="tab-content">
         <!--tab1 SATELLITE MASS, POSITIONS, MOTION AND DESCRIPTIONS-->
         <div id="tab1" class="tab-pane fade in active">
-            <!--How satellites revolve-->
-             <div id="t1svg" class="col-md-10"></div>
-             <div id="tooltipInfo"><span>Click anywhere in the screen to close tooltips</span></div>
+            <!--satellites revolving around Earth-->
+            <div class="row">
+                <div id="tooltipInfo"> Tooltip Placeholder</div>
+                <div id="svg">svg</div>
+            </div>
         </div>
 
         <!--tab2  ORBITS-->
         <div id="tab2" class="tab-pane fade">
             <div class="row">
                 <br>
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                 <div id="Selection1" style="float: left; padding-left: 130px">
-                    Select Country:
-                    <select id="Country" onchange="select()">
-                        <option value="USA" >USA</option>
-                        <option value="Russia" >Russia</option>
-                        <option value="China" >China</option>
-                        <option value="South Korea" >South Korea</option>
-                        <option value="Germany" >Germany</option>
-                        <option value="India" >India</option>
-                        <option value="Japan" >Japan</option>
-                        <option value="Norway" >Norway</option>
-                        <option value="All" selected="selected">All</option>
-                    </select>
+                <div class="col-sm-6">
+                    <div id="Selection1" class="text-right !important pull-right">
+                        Select Country:
+                        <select id="Country" onchange="select()">
+                            <option value="USA">USA</option>
+                            <option value="Russia">Russia</option>
+                            <option value="China">China</option>
+                            <option value="South Korea">South Korea</option>
+                            <option value="Germany">Germany</option>
+                            <option value="India">India</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Norway">Norway</option>
+                            <option value="All" selected="selected">All</option>
+                        </select>
+                    </div>
                 </div>
-                <div id="Selection2" style="float:left; padding-left: 15px">
-                    Select Users:
-                    <select id="Users" onchange="select()">
-                        <option value="Civil" >Civil</option>
-                        <option value="Military" >Military</option>
-                        <option value="Commercial">Commercial</option>
-                        <option value="Government">Government</option>
-                        <option value="All" selected="selected">All</option>
+                <div class="col-sm-6">
+                    <div id="Selection2" class="float-left text-left">
+                        Select Users:
+                        <select id="Users" onchange="select()">
+                            <option value="Civil">Civil</option>
+                            <option value="Military">Military</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Government">Government</option>
+                            <option value="All" selected="selected">All</option>
 
-                    </select>
+                        </select>
+                    </div>
                 </div>
-                </div>
-                <div class="col-sm-4"></div>
             </div>
-                <br>
-            
-                <div id="containerEllipses" class="col-sm-7">
-                    <svg id="ellipsesvg"></svg>
-                </div>
-                <div class="col-sm-5" id="zoomableScatter">
-                    <svg id="scattersvg"></svg>
-                </div>
-            
-            <div class="col-sm-5" id="radarchart"></div>
+            <br>
+            <div class="row"></div>
+            <div id="containerEllipses" class="col-sm-7">
+                <svg id="ellipsesvg"></svg>
+            </div>
+            <div class="col-sm-5" id="zoomableScatter">
+                <svg id="scattersvg"></svg>
+            </div>
+
+            <!--<div class="col-sm-5" id="radarchart"></div>-->
         </div>
 
 
         <!--tab3 USAGE AND PURPOSE OF SATELLITES-->
         <div id="tab3" class="tab-pane fade">
-            <div id="country_count" class = "col-sm-6"></div>
-            <div id="year_count" class = "col-sm-6"></div>
+            <div id="country_count" class="col-sm-6"></div>
+            <div id="year_count" class="col-sm-6"></div>
 
         </div>
 
     </div>
 </div>
+
 
 
 <!--Our Script files-->
@@ -117,8 +116,6 @@
 <script src="js/showTooltip.js"></script>
 <script src="js/gradients.js"></script>
 <script src="js/main.js"></script> <!--moving satellites-->
-
-
 
 
 <!--<script src="js/satelliteOrbits.js" type="text/javascript"></script>-->
@@ -130,7 +127,6 @@
 <script src="js/satellite.js"></script> <!--data-->
 <script src="js/tab3_1.js"></script>
 <script src="js/tab3_2.js"></script>
-
 
 
 <!--boilerplate code-->
