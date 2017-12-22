@@ -1,5 +1,5 @@
 var margin = {top: 80, right: 70, bottom: 90, left: 70},
-    width = 850 - margin.left - margin.right,
+    width = 750 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var svg = d3.select("#country_count").append("svg")
@@ -75,4 +75,6 @@ svg.selectAll(".rect")
     .attr("x", function(d) { return x(d.key); })
     .attr("y", function(d) { return y(d.value); })
     .attr("width", x.bandwidth())
-    .attr("height", function(d) { return height - y(d.value); });
+    .attr("height", function(d) { return height - y(d.value); })
+    .append('title')
+    .text(function (d) { return "Number of satellites: "+d.value;});

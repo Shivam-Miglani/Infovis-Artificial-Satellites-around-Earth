@@ -57,7 +57,9 @@
         <div id="tab2" class="tab-pane fade">
             <div class="row">
                 <br>
-                <div id="Selection1" class="col-sm-6 text-right">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                 <div id="Selection1" style="float: left; padding-left: 130px">
                     Select Country:
                     <select id="Country" onchange="select()">
                         <option value="USA" >USA</option>
@@ -71,7 +73,7 @@
                         <option value="All" selected="selected">All</option>
                     </select>
                 </div>
-                <div id="Selection2" class="col-sm-6 text-left">
+                <div id="Selection2" style="float:left; padding-left: 15px">
                     Select Users:
                     <select id="Users" onchange="select()">
                         <option value="Civil" >Civil</option>
@@ -82,24 +84,26 @@
 
                     </select>
                 </div>
+                </div>
+                <div class="col-sm-4"></div>
             </div>
                 <br>
-            <div class="row">
+            
                 <div id="containerEllipses" class="col-sm-7">
                     <svg id="ellipsesvg"></svg>
                 </div>
                 <div class="col-sm-5" id="zoomableScatter">
                     <svg id="scattersvg"></svg>
                 </div>
-            </div>
+            
             <div class="col-sm-5" id="radarchart"></div>
         </div>
 
 
         <!--tab3 USAGE AND PURPOSE OF SATELLITES-->
         <div id="tab3" class="tab-pane fade">
-            <div id="country_count" class="col-sm-6"></div>
-            <div id="year_count" class="col-sm-6"></div>
+            <div id="country_count" class = "col-sm-6"></div>
+            <div id="year_count" class = "col-sm-6"></div>
 
         </div>
 
