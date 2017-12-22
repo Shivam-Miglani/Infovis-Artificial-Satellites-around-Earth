@@ -27,6 +27,10 @@ h4,h5{
     fill: purple;
     opacity: 0.8;
 }
+.bar:hover{
+    fill:purple;
+    opacity:1;
+}
 
 .axis path,
 .axis line {
