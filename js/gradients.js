@@ -1,6 +1,3 @@
-///////////////////////////////////////////////////////////////////////////
-/////////////////////// Gradients per Planet or Total /////////////////////
-///////////////////////////////////////////////////////////////////////////
 function createGradients() {
 
     //Just for fun a gradient that runs over all satellites in a rainbow patterns
@@ -36,31 +33,4 @@ function createGradients() {
         .enter().append("stop")
         .attr("offset", function(d) { return d.offset; })
         .attr("stop-color", function(d) { return d.color; });
-
-    //Radial gradient with the center at one end of the circle, as if illuminated from the side
-    //A gradient is created for each planet and colored to the temperature of its star
-    var gradientContainer = container.append("g").attr("class","gradientContainer");
-
-    var gradientRadial = gradientContainer
-        .selectAll("radialGradient").data(satellites).enter()
-        .append("radialGradient")
-        .attr("cx", "50%")
-        .attr("cy", "50%")
-        .attr("r", "50%")
-        .attr("fx", "0%")
-        .attr("gradientUnits", "objectBoundingBox")
-        .attr('id', function(d){return "gradientRadial-"+d.ID})
-
-    gradientRadial.append("stop")
-        .attr("offset", "0%")
-        .attr("stop-color", function(d) {return d3.rgb(colorScale(d.temp)).brighter(1);});
-
-    gradientRadial.append("stop")
-        .attr("offset", "40%")
-        .attr("stop-color", function(d) {return colorScale(d.temp);});
-
-    gradientRadial.append("stop")
-        .attr("offset",  "100%")
-        .attr("stop-color", function(d) {return d3.rgb(colorScale(d.temp)).darker(1.75);});
-
-};
+}

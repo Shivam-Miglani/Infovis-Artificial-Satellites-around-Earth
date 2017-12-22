@@ -3,57 +3,59 @@ var
     w = window,
     d = document,
     e = d.documentElement,
-    g = d.getElementById('tag1'),
-    x = (w.innerWidth || e.clientWidth || g.clientWidth) - 50,
-    y = (w.innerHeight|| e.clientHeight|| g.clientHeight) - 50;
+    g = d.getElementById('svg')[0],
+    x = (e.clientWidth || g.clientWidth),
+    y = (e.clientHeight || g.clientHeight - 100);
 
-window.onresize = updateWindow;
-
-///////////////////////////////////////////////////////////////////////////
-///////////////////////// Initiate elements ///////////////////////////////
-///////////////////////////////////////////////////////////////////////////
 
 var stopTooltip = false;
-//Planet orbit variables
-//The larger this is the more accurate the speed is
-var resolution = 5, //perhaps make slider?
-    speedUp = 400000,
-    au = 149597871, //km
+//Satellite orbit variables
+var resolution = 5,
+    speedUp = 4000000,
     phi = 0, //rotation of ellipses
-    radiusSizer = 10, //increaser of radii of satellites
-    planetOpacity = 0.6;
-    scalingFactor = 0.01;
+    radiusSizer = 10, //radii of satellites
+    satelliteOpacity = 0.8;
+scalingFactor = 0.005;
+
+
+
+var zoom = d3.behavior.zoom()
+    .scaleExtent([1, 10])
+    .on("zoom", zoomed);
+
+var drag = d3.behavior.drag()
+    .origin(function (d) {
+        return d;
+    })
+    .on("dragstart", dragstarted)
+    .on("drag", dragged)
+    .on("dragend", dragended);
 
 //Create SVG
 var svg = d3.select("#svg").append("svg")
     .attr("width", x)
-    .attr("height", y);
-
+    .attr("height", y)
+    .call(zoom);
 
 //Create a container for everything with the centre in the middle
-var container = svg.append("g").attr("class","container")
-    .attr("transform", "translate(" + x/2 + "," + y/2 + ")");
-
+var container = svg.append("g").attr("class", "container")
+    .attr("transform", "translate(" + x / 4 + "," + y / 2 + ")");
 
 
 //Earth in middle
-var ImageWidth = "20px";
-container.
-append("svg:image")
+var ImageWidth = "100px";
+container.append("svg:image")
     .attr("x", -ImageWidth)
     .attr("y", -ImageWidth)
     .attr("class", "earth")
     .attr("xlink:href", "img/earth.png")
-    .attr("width", ImageWidth*2)
-    .attr("height", ImageWidth*2)
+    .attr("width", ImageWidth * 2)
+    .attr("height", ImageWidth * 2)
     .attr("text-anchor", "middle");
 
-///////////////////////////////////////////////////////////////////////////
-//////////////////////////// Create Scales ////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
 
 //Create color gradient for satellites
-var colors = ["#FB1108","#FD150B","#FA7806","#FBE426","#FCFB8F","#F3F5E7","#C7E4EA","#ABD6E6","#9AD2E1","#42A1C1","#1C5FA5", "#172484"];
+var colors = ["#FB1108", "#FD150B", "#FA7806", "#FBE426", "#FCFB8F", "#F3F5E7", "#C7E4EA", "#ABD6E6", "#9AD2E1", "#42A1C1", "#1C5FA5", "#172484"];
 var colorScale = d3.scale.linear()
     .domain([2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 14000, 20000, 30000])
     .range(colors);
@@ -61,7 +63,9 @@ var colorScale = d3.scale.linear()
 //Set scale for radius according to launch mass of satellites of circles
 var rScale = d3.scale.linear()
     .range([1, 20])
-    .domain([0, d3.max(satellites, function(d) { return d.LaunchMass*0.001; })]);
+    .domain([0, d3.max(satellites, function (d) {
+        return d.LaunchMass * 0.0001;
+    })]);
 
 //Format with 2 decimals
 var formatSI = d3.format(".2f");
@@ -69,116 +73,74 @@ var formatSI = d3.format(".2f");
 //Creating gradients to color up satellites
 createGradients();
 
-///////////////////////////////////////////////////////////////////////////
-/////////////////////////// Plot and move satellites /////////////////////////
-///////////////////////////////////////////////////////////////////////////
-
+// Plot and move satellites
 //Drawing a line for the orbit
-var orbitsContainer = container.append("g").attr("class","orbitsContainer");
+var orbitsContainer = container.append("g").attr("class", "orbitsContainer");
 var orbits = orbitsContainer.selectAll("g.orbit")
     .data(satellites).enter().append("ellipse")
     .attr("class", "orbit")
-    .attr("cx", function(d) {return d.cx* scalingFactor;})
-    .attr("cy", function(d) {return d.cy* scalingFactor;})
-    .attr("rx", function(d) {return d.major* scalingFactor;})
-    .attr("ry", function(d) {return d.minor* scalingFactor;})
+    .attr("cx", function (d) {
+        return d.cx * scalingFactor;
+    })
+    .attr("cy", function (d) {
+        return d.cy * scalingFactor;
+    })
+    .attr("rx", function (d) {
+        return d.major * scalingFactor;
+    })
+    .attr("ry", function (d) {
+        return d.minor * scalingFactor;
+    })
     .style("fill", "#3E5968")
     .style("fill-opacity", 0)
-    .style("stroke", "white")
-    .style("stroke-opacity", 0);
+    .style("stroke", "#999999")
+    .style("stroke-opacity", 0.5);
 
 //Drawing the satellites
-var planetContainer = container.append("g").attr("class","planetContainer");
-var satellites = planetContainer.selectAll("g.planet")
+var satContainer = container.append("g").attr("class", "satContainer");
+var satellites = satContainer.selectAll("g.sat")
     .data(satellites).enter()
-    //.append("g")
-    //.attr("class", "planetWrap")
     .append("circle")
-    .attr("class", "planet")
-    .attr("r", function(d) {return radiusSizer*d.Radius;})//rScale(d.Radius);})
-    .attr("cx", function(d) {return d.x;})
-    .attr("cy", function(d) {return d.y;})
-    .style("fill", function(d){return "url(#gradientLinear)";})
-    .style("opacity", planetOpacity)
+    .attr("class", "sat")
+    .attr("r", function (d) {
+        return radiusSizer * d.Radius;
+    })//rScale(d.Radius);})
+    .attr("cx", function (d) {
+        return d.x;
+    })
+    .attr("cy", function (d) {
+        return d.y;
+    })
+    .style("fill", function (d) {
+        return "url(#gradientLinear)";
+    })
+    .style("opacity", satelliteOpacity)
     .style("stroke-opacity", 0)
     .style("stroke-width", "3px")
     .style("stroke", "white")
-    .on("mouseover", function(d, i) {
+    .on("mouseover", function (d, i) {
         stopTooltip = false
         showTooltip(d);
         showEllipse(d, i, 0.8);
     })
-    .on("mouseout", function(d, i) {
+    .on("mouseout", function (d, i) {
         showEllipse(d, i, 0);
     });
 
-//Remove tooltip when clicking anywhere in body
-d3.select("svg")
-    .on("click", function(d) {stopTooltip = true;});
+function zoomed() {
+    container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
 
-///////////////////////////////////////////////////////////////////////////
-//////////////////////// Set up pointer events ////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-//Reload page
-d3.select("#reset").on("click", function(e) {location.reload();});
+function dragstarted(d) {
+    d3.event.sourceEvent.stopPropagation();
+    d3.select(this).classed("dragging", true);
+}
 
-//Show information
-d3.select("#info").on("click", showInfo);
+function dragged(d) {
+    d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+}
 
-//Remove info
-d3.select("#infoClose").on("click", closeInfo);
+function dragended(d) {
+    d3.select(this).classed("dragging", false);
+}
 
-//Skip intro
-d3.select("#remove")
-    .on("click", function(e) {
-
-        //Remove all non needed text
-        d3.select(".introWrapper").transition().style("opacity", 0);
-        d3.select("#start").transition().style("opacity", 0);
-        d3.select(".explanation").transition().style("opacity", 0);
-        d3.select(".progressWrapper").transition().style("opacity", 0);
-
-        //Make skip intro less visible, since now it doesn't work any more
-        d3.select("#remove")
-            .transition().duration(1000)
-            .style("pointer-events", "none")
-            .style("opacity",0.3);
-
-        //Legend visible
-        d3.select(".legendContainer").transition().style("opacity", 1);
-        //Bring all satellites back
-        dim(delayTime = 0);
-        bringBack(opacity = planetOpacity, delayTime=1);
-
-        //Reset any event listeners
-        resetEvents();
-    });
-
-
-//Scale satellites accordingly
-// var scale = false;
-// d3.select("#scale")
-//     .on("click", function(e) {
-//
-//         if (scale == false) {
-//             d3.select("#scale").text("unscale satellites");
-//
-//             d3.selectAll(".planet")
-//                 .transition().duration(2000)
-//                 .attr("r", function(d) {
-//                     var newRadius = radiusJupiter/au*3000*d.Radius;
-//                     if  (newRadius < 1) {return 0;}
-//                     else {return newRadius;}
-//                 });
-//
-//             scale = true;
-//         } else if (scale == true) {
-//             d3.select("#scale").text("scale satellites");
-//
-//             d3.selectAll(".planet")
-//                 .transition().duration(2000)
-//                 .attr("r", function(d) {return radiusSizer * d.Radius;});
-//
-//             scale = false;
-//         }//else if
-//     });

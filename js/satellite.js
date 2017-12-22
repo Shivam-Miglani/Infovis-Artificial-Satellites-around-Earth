@@ -1,4 +1,4 @@
-var satellites= [
+var satellites=[
     {
         "NameofSatellite": "Aalto-1",
         "Country": "NR (10/17)",
@@ -20563,8 +20563,8 @@ var satellites= [
         "Eccentricity": 0.00126,
         "Inclinationdegrees": 65.02,
         "Periodminutes": 92.57,
-        "Radius": 0.385,
-        "LaunchMass": 3850,
+        "Radius": 0.0385,
+        "LaunchMass": 385,
         "DateofLaunch": "27/02/2014",
         "ExpectedLifetime": "null",
         "LaunchSite": "Tanegashima Space Center",
@@ -44167,8 +44167,8 @@ var satellites= [
         "Eccentricity": 0.0000743,
         "Inclinationdegrees": 42.8,
         "Periodminutes": 91.8,
-        "Radius": 0.8506,
-        "LaunchMass": 8506,
+        "Radius": 0.03,
+        "LaunchMass": 300,
         "DateofLaunch": "29/09/2011",
         "ExpectedLifetime": "2 yrs.",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -44195,8 +44195,8 @@ var satellites= [
         "Eccentricity": 0.00117,
         "Inclinationdegrees": 97.4,
         "Periodminutes": 94.5,
-        "Radius": 0.25,
-        "LaunchMass": 2500,
+        "Radius": 0.025,
+        "LaunchMass": 250,
         "DateofLaunch": "24/08/2010",
         "ExpectedLifetime": "null",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -44223,8 +44223,8 @@ var satellites= [
         "Eccentricity": 0.00146,
         "Inclinationdegrees": 97.4,
         "Periodminutes": 94.5,
-        "Radius": 0.25,
-        "LaunchMass": 2500,
+        "Radius": 0.025,
+        "LaunchMass": 250,
         "DateofLaunch": "06/05/2012",
         "ExpectedLifetime": "null",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -44251,8 +44251,8 @@ var satellites= [
         "Eccentricity": 0.000801,
         "Inclinationdegrees": 97.36,
         "Periodminutes": 94.5,
-        "Radius": 0.25,
-        "LaunchMass": 2500,
+        "Radius": 0.025,
+        "LaunchMass": 250,
         "DateofLaunch": "26/10/2015",
         "ExpectedLifetime": "null",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -44279,8 +44279,8 @@ var satellites= [
         "Eccentricity": 0.00163,
         "Inclinationdegrees": 96.9,
         "Periodminutes": 92.4,
-        "Radius": 0.24,
-        "LaunchMass": 2400,
+        "Radius": 0.024,
+        "LaunchMass": 240,
         "DateofLaunch": "02/03/2017",
         "ExpectedLifetime": "null",
         "LaunchSite": "Jiuquan Satellite Launch Center",
@@ -46295,8 +46295,8 @@ var satellites= [
         "Eccentricity": 0.00119,
         "Inclinationdegrees": 38,
         "Periodminutes": 90.83,
-        "Radius": 0.499,
-        "LaunchMass": 4990,
+        "Radius": 0.04,
+        "LaunchMass": 400,
         "DateofLaunch": "20/05/2015",
         "ExpectedLifetime": "null",
         "LaunchSite": "Cape Canaveral",
@@ -48663,7 +48663,7 @@ var satellites= [
         "cy": 0,
         "r": 493.5
     }
-];
+]
 
 
 var scByCountry = d3.nest()

@@ -1,42 +1,6 @@
-///////////////////////////////////////////////////////////////////////////
-/////////////////////////// Other functions ///////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-
-// window.onerror = function() {
-//     location.reload();
-// }
-
-
-//Change the text during introduction
-function changeText (newText, delayDisappear, delayAppear, xloc, yloc, finalText) {
-
-    //If finalText is not provided, it is not the last text of the Draw step
-    if(typeof(finalText)==='undefined') finalText = false;
-
-    if(typeof(xloc)==='undefined') xloc = 0;
-    if(typeof(yloc)==='undefined') yloc = -200;
-
-    TextTop
-    //Current text disappear
-        .transition().delay(700 * delayDisappear).duration(700)
-        .attr('opacity', 0)
-        //New text appear
-        .call(endall,  function() {
-            TextTop.text(newText)
-                .attr("y", yloc + "px")
-                .attr("x", xloc + "px")
-                .call(wrap, 300)
-            ;
-        })
-        .transition().delay(700 * delayAppear).duration(700)
-        .attr('opacity', 1)
-    ;
-}// function changeTopText
-
-//Change x and y location of each planet
+//Change x and y coordinates of each satellite
 d3.timer(function() {
-    //Move the planet - DO NOT USE TRANSITION
-    d3.selectAll(".planet")
+    d3.selectAll(".sat")
         .attr("cx", locate("x"))
         .attr("cy", locate("y"))
         .attr("transform", function(d) {
@@ -45,7 +9,7 @@ d3.timer(function() {
     ;
 });
 
-//Calculate the new x or y position per planet
+//Calculate the new x or y position per satellite
 function locate(coord) {
     return function(d){
         var k = 360 * d.major * d.minor / ((d.Periodminutes/60) * resolution * speedUp);
@@ -54,7 +18,7 @@ function locate(coord) {
             d.theta += k / (d.r * d.r);
             d.r = d.major  * (1 - d.Eccentricity * d.Eccentricity) / (1 - d.Eccentricity * Math.cos(toRadians(d.theta)));
             d.r = d.r * scalingFactor
-        }// for
+        }
 
         var x1 = d.r * Math.cos(toRadians(d.theta)) - d.focus;
 
@@ -77,33 +41,32 @@ function locate(coord) {
     };
 }//function locate
 
-//Show the total orbit of the hovered over planet
+//Show the total orbit of the hovered over satellite
 function showEllipse(d, i, opacity) {
     var satellite = i;
-    console.log(d);
     var duration = (opacity == 0) ? 2000 : 100; //If the opacity is zero slowly remove the orbit line
 
-    //Highlight the chosen planet
-    svg.selectAll(".planet")
-        .filter(function(d, i) {return i == satellite;})
+
+    svg.selectAll(".sat")
+        .filter(function(d, i) { return i == satellite;})
         .transition().duration(duration)
         .style("stroke-opacity", opacity * 1.25);
 
-    //Select the orbit with the same index as the planet
+    //Select the orbit with the same index as the satellite
     svg.selectAll(".orbit")
-        .filter(function(d, i) {return i == satellite;})
+        .filter(function(d, i) {console.log(i==satellite); return i == satellite;})
         .transition().duration(duration)
         .style("stroke-opacity", opacity)
         .style("fill-opacity", opacity/3);
 
-}//showEllipse
+}
 
 //Decrease opacity of non selected stellar classes when hovering in Legend
 function classSelect(opacity) {
     return function(d, i) {
         stopTooltip = true;
         var chosen = d.sClass;
-        svg.selectAll(".planet")
+        svg.selectAll(".sat")
             .filter(function(d) { return d.class != chosen; })
             .transition()
             .style("opacity", opacity);
@@ -132,17 +95,16 @@ function closeInfo() {
 //Remove all events
 function removeEvents() {
     //Remove event listeners during examples
-    d3.selectAll('.planet').on('mouseover', null).on('mouseout', null);
-    d3.selectAll('.legend').on('mouseover', null).on('mouseout', null);
+    d3.selectAll('.sat').on('mouseover', null).on('mouseout', null);
     d3.select("svg").on("click", null);
 }//function removeEvents
 
 //Reset all events
 function resetEvents() {
-    //Replace planet events
-    d3.selectAll('.planet')
+    //Replace saatellite events
+    d3.selectAll('.sat')
         .on("mouseover", function(d, i) {
-            stopTooltip = false
+            stopTooltip = false;
             showTooltip(d);
             showEllipse(d, i, 0.8);
         })
@@ -166,7 +128,7 @@ function highlight(planet, delayTime){
     var time = 1000;
 
     //Highlight the chosen planet
-    svg.selectAll(".planet")
+    svg.selectAll(".sat")
         .filter(function(d, i) {return i == planet;})
         .transition().delay(700 * delayTime).duration(time)
         .style("stroke-opacity", 1)
@@ -192,7 +154,7 @@ function bringBack(opacity, delayTime){
     var time = 500;
 
     //Change opacity of all
-    svg.selectAll(".planet")
+    svg.selectAll(".sat")
         .transition().delay(700 * delayTime).duration(time)
         .style("opacity", opacity);
 
@@ -206,7 +168,7 @@ function dimOne(planet, delayTime) {
     var time = 500;
 
     //Dim all other satellites
-    svg.selectAll(".planet")
+    svg.selectAll(".sat")
         .filter(function(d, i) {return i == planet;})
         .transition().delay(700 * delayTime).duration(time)
         .style("stroke-opacity", 0)
@@ -229,7 +191,7 @@ function dim(delayTime) {
     var time = 1000;
 
     //Dim all other satellites
-    svg.selectAll(".planet")
+    svg.selectAll(".sat")
         .transition().delay(700 * delayTime).duration(time)
         .style("stroke-opacity", 0)
         .style("opacity", 0.1);
@@ -280,8 +242,8 @@ function endall(transition, callback) {
 
 //Outline taken from http://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
 function updateWindow(){
-    x = (w.innerWidth || e.clientWidth || g.clientWidth) - 50;
-    y = (w.innerHeight|| e.clientHeight|| g.clientHeight) - 50;
+    x = (e.clientWidth || g.clientWidth) - 50;
+    y = (e.clientHeight|| g.clientHeight) - 50;
 
     svg.attr("width", x).attr("height", y);
     d3.selectAll(".container").attr("transform", "translate(" + x/2 + "," + y/2 + ")");

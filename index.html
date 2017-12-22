@@ -4,31 +4,30 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>InfoVis</title>
+    <title>InfoVis - Group 7</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="apple-touch-icon" href="icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <!--css-->
-    <link rel="stylesheet" href="css/main.css"/>
-    <link rel="stylesheet" href="css/circles.css">
-    <link rel="stylesheet" href="css/tooltip.css">
-    <link rel="stylesheet" href="css/infoBox.css">
-
-    <!--d3-->
-    <script src="https://d3js.org/d3.v3.min.js"></script>
-
     <!--bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--css-->
+    <link rel="stylesheet" href="css/circles.css">
+    <link rel="stylesheet" href="css/tooltip.css">
+    <link rel="stylesheet" href="css/infoBox.css">
+    <link rel="stylesheet" href="css/main.css"/>
+
+    <!--d3-->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
 </head>
 
 
-<body class="bg-dark">
-
+<body>
 
 <!--tabbed menu-->
 <div class="container-fluid">
@@ -46,8 +45,8 @@
         <div id="tab1" class="tab-pane fade in active">
             <!--satellites revolving around Earth-->
             <div class="row">
-                <div id="tooltipInfo"> Tooltip Placeholder</div>
-                <div id="svg">svg</div>
+                <div id="tooltipInfo" class="col-md-2">Tooltip Placeholder</div>
+                <div id="svg" class="col-md-8">svg</div>
             </div>
         </div>
 
