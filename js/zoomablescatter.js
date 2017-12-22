@@ -28,7 +28,7 @@ d3.csv('data_ellipse.csv', function (data) {
      width = 600 - margin.left - margin.right,
      height = 400 - margin.top - margin.bottom;
 
-     colors = ["blue", "green", "red", "black"]
+     colors = ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]
      colorScale = d3.scaleOrdinal()
         .domain(["LEO", "MEO", "GEO", "Elliptical"])
         .range(colors);
@@ -115,8 +115,8 @@ d3.csv('data_ellipse.csv', function (data) {
                 .transition()
                 .duration(500)
                 .attr('r',6)
-                .attr('stroke-width',.5)
-                .attr('stroke', 'black')
+                //.attr('stroke-width',.5)
+                //.attr('stroke', 'black')
         })
         .on('mouseout', function () {
             
@@ -215,7 +215,7 @@ function start(){
     width = 600 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
         
-     colors = ["blue", "green", "red", "black"]
+     colors = ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]
      colorScale = d3.scaleOrdinal()
         .domain(["LEO", "MEO", "GEO", "Elliptical"])
         .range(colors);
@@ -289,8 +289,8 @@ function start(){
                 .transition()
                 .duration(500)
                 .attr('r',6)
-                .attr('stroke-width',.5)
-                .attr('stroke', 'black')
+                //.attr('stroke-width',.5)
+                //.attr('stroke', 'black')
         })
         .on('mouseout', function () {
             

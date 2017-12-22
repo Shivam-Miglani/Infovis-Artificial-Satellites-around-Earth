@@ -25,7 +25,7 @@ function update1(Country, Users){
         var h = 1000 - margin.top - margin.bottom
         var w = 1000 - margin.left - margin.right
 
-        var colors = ["#1f77b4", "#2ca02c", "#d62728", "black"]
+        var colors = ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]
         var colorScale = d3.scale.ordinal()
             .domain(["LEO", "MEO", "GEO", "Elliptical"])
             .range(colors);
@@ -85,7 +85,7 @@ function update1(Country, Users){
                 d3.select(this)
                     .transition()
                     .duration(500)
-                    .attr("stroke","black")
+                    //.attr("stroke","black")
                     .attr('stroke-width',5)
             })
             .on('mouseout', function () {
@@ -117,7 +117,7 @@ function start1(){
         var h = 1000 - margin.top - margin.bottom
         var w = 1000 - margin.left - margin.right
 
-        var colors = ["#1f77b4", "#2ca02c", "#d62728", "black"]
+        var colors = ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]
         var colorScale = d3.scale.ordinal()
             .domain(["LEO", "MEO", "GEO", "Elliptical"])
             .range(colors);
@@ -169,7 +169,7 @@ function start1(){
                 d3.select(this)
                     .transition()
                     .duration(500)
-                    .attr("stroke","black")
+                    //.attr("stroke","black")
                     .attr('stroke-width',5)
             })
             .on('mouseout', function () {

@@ -1,0 +1,27 @@
+
+/*HTML Horizonal Legend*/
+
+.country-name {
+    margin: 0 !important;
+}
+.key-dot {
+    display: inline-block;
+    height: 10px;
+    margin-right: .5em;
+    width: 10px;
+}
+
+.leo { background: #e41a1c;}
+.meo { background: #377eb8;}
+.geo { background: #4daf4a;}
+.heo { background: #984ea3;
+}
+
+#legend2{
+    overflow:hidden;
+}
+.legend2 {
+    float:left;
+    margin-right: 1em;
+}
+

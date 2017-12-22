@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/circles.css">
     <link rel="stylesheet" href="css/tooltip.css">
     <link rel="stylesheet" href="css/infoBox.css">
-
+    <link rel="stylesheet" href="css/legend.css">
 
 
     <!--d3-->
@@ -86,15 +86,23 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center">Legend: Class of Orbits
+                
+                       <div class="col-sm-1"> <p><span class="key-dot leo"></span>LEO</p> </div>
+                       <div class="col-sm-1"> <p ><span class="key-dot meo"></span>MEO</p> </div>
+                       <div class="col-sm-1"> <p ><span class="key-dot geo"></span>GEO</p> </div>
+                     <div class="col-sm-1"> <p ><span class="key-dot heo"></span>HEO</p> </div>
+                    
+                </div>
             </div>
             <br>
-
+            
             <div id="containerEllipses" class="col-sm-7">
                 <svg id="ellipsesvg"></svg>
             </div>
-            <div class="col-sm-5" id="zoomableScatter">
+            <div class="col-sm-5 text-center" id="zoomableScatter">
                 <svg id="scattersvg"></svg>
+                Note: In the above scatterplot, select an area to zoomin and double click to zoomout.
             </div>
 
             <div class="col-sm-5" id="radarchart"></div>
