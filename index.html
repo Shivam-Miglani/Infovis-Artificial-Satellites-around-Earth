@@ -13,10 +13,10 @@
 
     <!--css-->
 
-    <link rel="stylesheet" href="css/circles.css">
+
+    <link rel="stylesheet" href="css/legend.css">
     <link rel="stylesheet" href="css/tooltip.css">
     <link rel="stylesheet" href="css/infoBox.css">
-    <link rel="stylesheet" href="css/legend.css">
 
 
     <!--d3-->
@@ -27,6 +27,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/main.css"/>
+
 
 </head>
 
@@ -50,7 +51,8 @@
         <div id="tab1" class="tab-pane fade in active">
             <!--How satellites revolve-->
             <div id="svg" class="col-md-12">
-                <div id="tooltipInfo" class="col-md-2">Tooltip Placeholder</div>
+                <div class="col-md-2" style="color:white;">*You can drag the whole satellite system by single click and zoom on it by pan zooming.</div>
+                <div id="tooltipInfo" class="col-md-2">ToolTip</div>
             </div>
         </div>
 
@@ -87,16 +89,16 @@
                     </div>
                 </div>
                 <div class="col-sm-4 text-center">Legend: Class of Orbits
-                
+
                        <div class="col-sm-1"> <p><span class="key-dot leo"></span>LEO</p> </div>
                        <div class="col-sm-1"> <p ><span class="key-dot meo"></span>MEO</p> </div>
                        <div class="col-sm-1"> <p ><span class="key-dot geo"></span>GEO</p> </div>
                      <div class="col-sm-1"> <p ><span class="key-dot heo"></span>HEO</p> </div>
-                    
+
                 </div>
             </div>
             <br>
-            
+
             <div id="containerEllipses" class="col-sm-7">
                 <svg id="ellipsesvg"></svg>
             </div>
