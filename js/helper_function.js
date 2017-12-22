@@ -9,7 +9,7 @@ d3.timer(function() {
     ;
 });
 
-//Calculate the new x or y position per satellite
+//Calculate new coordinates of each satellite
 function locate(coord) {
     return function(d){
         var k = 360 * d.major * d.minor / ((d.Periodminutes/60) * resolution * speedUp);
@@ -17,17 +17,13 @@ function locate(coord) {
         for (var i = 0; i < resolution; i++) {
             d.theta += k / (d.r * d.r);
             d.r = d.major  * (1 - d.Eccentricity * d.Eccentricity) / (1 - d.Eccentricity * Math.cos(toRadians(d.theta)));
-            d.r = d.r * scalingFactor
+            d.r = d.r * scalingFactor;
         }
-
         var x1 = d.r * Math.cos(toRadians(d.theta)) - d.focus;
-
         var y1 = d.r * Math.sin(toRadians(d.theta));
 
         if (d.theta > 360) {d.theta -= 360;}
-
         if (coord === "x") {
-            //New x coordinates
             newX = d.cx + x1 * Math.cos(toRadians(phi)) - y1 * Math.sin(toRadians(phi));
             d.x = newX;
             //console.log(newX);
@@ -39,7 +35,7 @@ function locate(coord) {
             return newY;
         }
     };
-}//function locate
+}
 
 //Show the total orbit of the hovered over satellite
 function showEllipse(d, i, opacity) {

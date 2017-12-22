@@ -11,16 +11,16 @@
     <link rel="apple-touch-icon" href="icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <!--bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <!--css-->
     <link rel="stylesheet" href="css/circles.css">
     <link rel="stylesheet" href="css/tooltip.css">
     <link rel="stylesheet" href="css/infoBox.css">
     <link rel="stylesheet" href="css/main.css"/>
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!--d3-->
     <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -31,7 +31,7 @@
 
 <!--tabbed menu-->
 <div class="container-fluid">
-    <h4>Satellite Tracker</h4>
+    <h4 class="">Satellite Tracker</h4>
     <h5>Tracks 1738 artificial satellites currently orbiting Earth</h5>
 
     <ul class="nav nav-tabs">
@@ -42,11 +42,10 @@
 
     <div class="tab-content">
         <!--tab1 SATELLITE MASS, POSITIONS, MOTION AND DESCRIPTIONS-->
-        <div id="tab1" class="tab-pane fade in active">
+        <div id="tab1" class="tab-pane fade in active" back>
             <!--satellites revolving around Earth-->
             <div class="row">
-                <div id="tooltipInfo" class="col-md-2">Tooltip Placeholder</div>
-                <div id="svg" class="col-md-8">svg</div>
+                <div id="svg" class="col-md-12"><div id="tooltipInfo" class="col-md-2">Tooltip Placeholder</div></div>
             </div>
         </div>
 
@@ -55,7 +54,7 @@
             <div class="row">
                 <br>
                 <div class="col-sm-6">
-                    <div id="Selection1" class="text-right !important pull-right">
+                    <div id="Selection1" class="text-right pull-right">
                         Select Country:
                         <select id="Country" onchange="select()">
                             <option value="USA">USA</option>
@@ -79,7 +78,6 @@
                             <option value="Commercial">Commercial</option>
                             <option value="Government">Government</option>
                             <option value="All" selected="selected">All</option>
-
                         </select>
                     </div>
                 </div>

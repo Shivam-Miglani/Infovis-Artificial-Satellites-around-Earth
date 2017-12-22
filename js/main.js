@@ -15,12 +15,12 @@ var resolution = 5,
     phi = 0, //rotation of ellipses
     radiusSizer = 10, //radii of satellites
     satelliteOpacity = 0.8;
-scalingFactor = 0.005;
+    scalingFactor = 0.003;
 
 
 
 var zoom = d3.behavior.zoom()
-    .scaleExtent([1, 10])
+    .scaleExtent([1, 5])
     .on("zoom", zoomed);
 
 var drag = d3.behavior.drag()
@@ -94,7 +94,8 @@ var orbits = orbitsContainer.selectAll("g.orbit")
     .style("fill", "#3E5968")
     .style("fill-opacity", 0)
     .style("stroke", "#999999")
-    .style("stroke-opacity", 0.5);
+    .style("stroke-width","0.05em")
+    .style("stroke-opacity", 0.7);
 
 //Drawing the satellites
 var satContainer = container.append("g").attr("class", "satContainer");
