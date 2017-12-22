@@ -7,6 +7,11 @@ body {
 
 #tab1{
     background-color: #292929;
+
+}
+
+#tab3{
+
 }
 
 h4,h5{
@@ -56,13 +61,21 @@ span {
     display:inline-block;
     vertical-align:middle
 }
-
-
-
-.bar {
-    float: left;
-    width: 15px;
+select {
+    display: block;
 }
+.bar {
+    fill: purple;
+    opacity: 0.8;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
 
 #color {
     visibility: hidden;
@@ -89,20 +102,6 @@ span {
     color: #CCCCCC;
 }
 
-.title {
-    font-family: Oswald;
-    font-size: 20px;
-    font-weight: 300;
-    color: white;
-    text-align: left;
-}
-
-.intro {
-    font-size: 12px;
-    font-weight: 300;
-    color: white;
-    text-align: left;
-}
 
 .explanation {
     font-size: 14px;
@@ -112,10 +111,24 @@ span {
     text-anchor: middle;
 }
 
-
-.progressWrapper {
-    cursor: pointer;
-    z-index: 1;
+.bar {
+    fill: steelblue;
 }
+
+.bar:hover {
+    fill: orange;
+}
+
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
 
 

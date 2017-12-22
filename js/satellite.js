@@ -48663,4 +48663,21 @@ var satellites= [
         "cy": 0,
         "r": 493.5
     }
-]
+];
+
+
+var scByCountry = d3.nest()
+    .key(function(d) { return d.Country; })
+    .rollup(function(v){
+        if(v.length>10) return v.length; else return 0; })
+    .entries(satellites);
+
+console.log(scByCountry);
+
+var scByLaunchYear = d3.nest()
+    .key(function(d) { return d.DateofLaunch.split("/").pop();})
+    .rollup(function(v){ return v.length; })
+    .entries(satellites)
+    .sort(function(a, b){ return d3.ascending(+a.key, +b.key); });
+
+console.log(scByLaunchYear);
