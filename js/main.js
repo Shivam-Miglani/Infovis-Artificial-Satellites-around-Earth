@@ -111,12 +111,17 @@ var satellite = satContainer.selectAll("g.sat")
     .style("stroke-width", "3px")
     .style("stroke", "white")
     .on("mouseover", function (d, i) {
-        showTooltip(d);
-        showEllipse(d, i, 0.8);
     })
     .on("mouseout", function (d, i) {
         showEllipse(d, i, 0);
-    });
+    })
+.append('title') // Tooltip
+            .text(function (d) { return d.NameofSatellite +
+                '\nLaunch Site: ' + d.LaunchSite +
+                '\nLaunch Vehicle: ' + d.LaunchVehicle +
+                '\nOwner: ' + d.Owner+
+                '\nLaunch Mass(kg): ' + d.LaunchMass
+            });
 
 function zoomed() {
     container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");

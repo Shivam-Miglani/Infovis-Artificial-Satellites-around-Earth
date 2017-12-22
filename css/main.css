@@ -1,6 +1,7 @@
 body {
     font-size: 14px;
     cursor: default;
+    overflow: hidden;
 }
 
 h4,h5{
