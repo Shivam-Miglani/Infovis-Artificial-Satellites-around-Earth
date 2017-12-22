@@ -42,7 +42,6 @@ function showEllipse(d, i, opacity) {
     var satellite = i;
     var duration = (opacity == 0) ? 2000 : 100; //If the opacity is zero slowly remove the orbit line
 
-
     svg.selectAll(".sat")
         .filter(function(d, i) { return i == satellite;})
         .transition().duration(duration)
@@ -57,152 +56,11 @@ function showEllipse(d, i, opacity) {
 
 }
 
-//Decrease opacity of non selected stellar classes when hovering in Legend
-function classSelect(opacity) {
-    return function(d, i) {
-        stopTooltip = true;
-        var chosen = d.sClass;
-        svg.selectAll(".sat")
-            .filter(function(d) { return d.class != chosen; })
-            .transition()
-            .style("opacity", opacity);
-    };
-}//function classSelect
-
 //Turn degrees into radians
 function toRadians (angle) { return angle * (Math.PI / 180);}
 
-//Show the information box
-function showInfo() {
-    d3.select("#information").style("z-index","1000").transition().duration(300).style('opacity',1);
-    stopTooltip = true;
-    removeEvents();
-}//showInfo
 
-//Hide the information box
-function closeInfo() {
-    d3.select('#information').transition().duration(300).style('opacity',0)
-        .call(endall,  function() {
-            d3.select('#information').style("z-index","-1000");
-        });
-    resetEvents();
-}//closeInfo
-
-//Remove all events
-function removeEvents() {
-    //Remove event listeners during examples
-    d3.selectAll('.sat').on('mouseover', null).on('mouseout', null);
-    d3.select("svg").on("click", null);
-}//function removeEvents
-
-//Reset all events
-function resetEvents() {
-    //Replace saatellite events
-    d3.selectAll('.sat')
-        .on("mouseover", function(d, i) {
-            stopTooltip = false;
-            showTooltip(d);
-            showEllipse(d, i, 0.8);
-        })
-        .on("mouseout", function(d, i) {
-            showEllipse(d, i, 0);
-        });
-
-
-
-    //Replace click event
-    d3.select("svg")
-        .on("click", function(d) {stopTooltip = true;});
-}
-
-
-//Highlight the chosen planet and its orbit
-function highlight(planet, delayTime){
-
-    if(typeof(delayTime)==='undefined') delayTime = 0;
-    //if(typeof(tooltip)==='undefined') tooltip = true;
-    var time = 1000;
-
-    //Highlight the chosen planet
-    svg.selectAll(".sat")
-        .filter(function(d, i) {return i == planet;})
-        .transition().delay(700 * delayTime).duration(time)
-        .style("stroke-opacity", 1)
-        .style("opacity", 0.95)
-    //.transition()
-    //.each(function(d) {if (tooltip == true) {showTooltip(d);}})
-    ;
-
-    //Select the orbit with the same index as the planet
-    svg.selectAll(".orbit")
-        .filter(function(d, i) {return i == planet;})
-        .transition().delay(700 * delayTime).duration(time)
-        .style("stroke-opacity", 0.8)
-        .style("fill-opacity", 0.2);
-
-}//function highlight
-
-
-//Function to bring opacity back of all satellites
-function bringBack(opacity, delayTime){
-
-    if(typeof(delayTime)==='undefined') delayTime = 0;
-    var time = 500;
-
-    //Change opacity of all
-    svg.selectAll(".sat")
-        .transition().delay(700 * delayTime).duration(time)
-        .style("opacity", opacity);
-
-}//function bringBack
-
-
-//Dim all other satellites (and orbits)
-function dimOne(planet, delayTime) {
-
-    if(typeof(delayTime)==='undefined') delayTime = 0;
-    var time = 500;
-
-    //Dim all other satellites
-    svg.selectAll(".sat")
-        .filter(function(d, i) {return i == planet;})
-        .transition().delay(700 * delayTime).duration(time)
-        .style("stroke-opacity", 0)
-        .style("opacity", 0.1);
-
-    //Select the orbit with the same index as the planet
-    svg.selectAll(".orbit")
-        .filter(function(d, i) {return i == planet;})
-        .transition().delay(700 * delayTime).duration(time)
-        .style("stroke-opacity", 0)
-        .style("fill-opacity", 0);
-
-}//function dim
-
-
-//Dim all satellites (and orbits)
-function dim(delayTime) {
-
-    if(typeof(delayTime)==='undefined') delayTime = 0;
-    var time = 1000;
-
-    //Dim all other satellites
-    svg.selectAll(".sat")
-        .transition().delay(700 * delayTime).duration(time)
-        .style("stroke-opacity", 0)
-        .style("opacity", 0.1);
-
-    //Select the orbit with the same index as the planet
-    svg.selectAll(".orbit")
-        .transition().delay(700 * delayTime).duration(time)
-        .style("stroke-opacity", 0)
-        .style("fill-opacity", 0);
-
-}//function dim
-
-
-//Taken from http://bl.ocks.org/mbostock/7555321
-//Wraps SVG text
+//http://bl.ocks.org/mbostock/7555321
 function wrap(text, width) {
     var text = d3.select(this[0][0]),
         words = text.text().split(/\s+/).reverse(),
@@ -236,9 +94,9 @@ function endall(transition, callback) {
         .each("end", function() { if (!--n) callback.apply(this, arguments); });
 }
 
-//Outline taken from http://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
+//http://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
 function updateWindow(){
-    x = (e.clientWidth || g.clientWidth) - 50;
+    x = (e.clientWidth || g.clientWidth);
     y = (e.clientHeight|| g.clientHeight) - 50;
 
     svg.attr("width", x).attr("height", y);

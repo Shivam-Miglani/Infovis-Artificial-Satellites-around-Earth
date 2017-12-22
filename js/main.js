@@ -8,28 +8,19 @@ var
     y = (e.clientHeight || g.clientHeight - 100);
 
 
-var stopTooltip = false;
 //Satellite orbit variables
 var resolution = 5,
-    speedUp = 4000000,
+    speedUp = 4*4000000,
     phi = 0, //rotation of ellipses
-    radiusSizer = 10, //radii of satellites
+    radiusSizer = 10, //radii of satellites - is based on launch mass - radius sizer just scales them.
     satelliteOpacity = 0.8;
-    scalingFactor = 0.003;
+    scalingFactor = 0.0029; //scaling what to show on screen.
 
 
 
 var zoom = d3.behavior.zoom()
     .scaleExtent([1, 5])
     .on("zoom", zoomed);
-
-var drag = d3.behavior.drag()
-    .origin(function (d) {
-        return d;
-    })
-    .on("dragstart", dragstarted)
-    .on("drag", dragged)
-    .on("dragend", dragended);
 
 //Create SVG
 var svg = d3.select("#svg").append("svg")
@@ -43,7 +34,7 @@ var container = svg.append("g").attr("class", "container")
 
 
 //Earth in middle
-var ImageWidth = "100px";
+var ImageWidth = "40";
 container.append("svg:image")
     .attr("x", -ImageWidth)
     .attr("y", -ImageWidth)
@@ -99,13 +90,13 @@ var orbits = orbitsContainer.selectAll("g.orbit")
 
 //Drawing the satellites
 var satContainer = container.append("g").attr("class", "satContainer");
-var satellites = satContainer.selectAll("g.sat")
+var satellite = satContainer.selectAll("g.sat")
     .data(satellites).enter()
     .append("circle")
     .attr("class", "sat")
     .attr("r", function (d) {
         return radiusSizer * d.Radius;
-    })//rScale(d.Radius);})
+    })
     .attr("cx", function (d) {
         return d.x;
     })
@@ -120,7 +111,6 @@ var satellites = satContainer.selectAll("g.sat")
     .style("stroke-width", "3px")
     .style("stroke", "white")
     .on("mouseover", function (d, i) {
-        stopTooltip = false
         showTooltip(d);
         showEllipse(d, i, 0.8);
     })
@@ -132,16 +122,4 @@ function zoomed() {
     container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
-function dragstarted(d) {
-    d3.event.sourceEvent.stopPropagation();
-    d3.select(this).classed("dragging", true);
-}
-
-function dragged(d) {
-    d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-}
-
-function dragended(d) {
-    d3.select(this).classed("dragging", false);
-}
 

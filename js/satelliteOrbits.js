@@ -67,15 +67,12 @@ var green = 0, red = 0, yellow = 0, blue = 0;
 //plotting planets in each level
 for (var j = 0; j < satellites.length; j++) {
     if (satellites[j]["ClassofOrbit"] == "LEO") {
-        var orbits = satellites[j]["ClassofOrbit"];
-        var sat = satellites[j]["NameofSatellite"];
         yellow += 1;
         //plot on the inner circle
         var r = (innerradius[1] + outerradius[1]) / 2;
         var a = (myScale(startangle[0]) + myScale(endangle[0])) / 2 - (Math.PI / 2);
         a += (0.436332 * j);
         var coors = [Math.cos(a) * r, Math.sin(a) * r];
-        //console.log(orbits,sat);
         svgquadrant.append('circle')
             .style('fill', 'yellow')
             .attr('opacity',0.1)
