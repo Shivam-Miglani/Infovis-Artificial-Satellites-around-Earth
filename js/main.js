@@ -26,7 +26,7 @@ var zoom = d3.behavior.zoom()
 var svg = d3.select("#svg").append("svg")
     .attr("width", x)
     .attr("height", y)
-    .call(zoom);
+    .call(zoom) .on("wheel.zoom", null);;
 
 //Create a container for everything with the centre in the middle
 var container = svg.append("g").attr("class", "container")
@@ -107,9 +107,9 @@ var satellite = satContainer.selectAll("g.sat")
         return "url(#gradientLinear)";
     })
     .style("opacity", satelliteOpacity)
-    .style("stroke-opacity", 0)
-    .style("stroke-width", "3px")
-    .style("stroke", "white")
+    .style("stroke-opacity", 0.5)
+    .style("stroke-width", "1px")
+    .style("stroke", "red")
     .on("mouseover", function (d, i) {
     })
     .on("mouseout", function (d, i) {
