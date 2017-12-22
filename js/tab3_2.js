@@ -2,26 +2,25 @@ var svg = d3.select("#yc");
 start4();
 
 function select4(){
-    
+
             var Purpose = document.getElementById("Purpose").value;
             var Users1 = document.getElementById("Users1").value;
-            
-        console.log("baal" + Users1);
+
             //console.log(Purpose);
             //console.log(Users1);
             if(Purpose=="All" && Users1=="All"){
-                
+
                 start4();} //calls the initial overview drawing
             else{
             update4(Purpose, Users1); }
-    
-    
+
+
 }
 
 
 function start4(){
-    
-    
+
+
     d3.select("#yc").selectAll("g").remove();
 var margin = {top: 80, right: 70, bottom: 90, left: 70},
     width = 750 - margin.left - margin.right,
@@ -102,14 +101,14 @@ svg.selectAll(".rect")
     .attr("height", function(d) { return height - y(d.value); })
     .append('title')
     .text(function (d) { return "Number of satellites: "+d.value;});
-    
+
 }
 
 
-function update4(Purpose, Users){
-    
+function update4(Purpose, Users1){
+
     d3.select("#yc").selectAll("g").remove();
-    
+
     var margin = {top: 80, right: 70, bottom: 90, left: 70},
     width = 750 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -128,12 +127,18 @@ var scByLaunchYear1 = d3.nest()
     .rollup(function(v){ return v.length; })
     .entries(satellites)
     .sort(function(a, b){ return d3.ascending(+a.key, +b.key); });
-    
+
     var scByLaunchYear2 = scByLaunchYear1.slice(1);
-    
-    //console.log(JSON.stringify(scByLaunchYear1));
-    //console.log(JSON.stringify(scByLaunchYear2));
-    
+
+
+
+    if(Purpose=="Technology Development" || Users1=="Civil" ){
+        scByLaunchYear2 = scByLaunchYear2.slice(1);
+    }
+
+    // console.log(JSON.stringify(scByLaunchYear1));
+    // console.log(JSON.stringify(scByLaunchYear2));
+
 var x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
 var y = d3.scaleLinear().range([height, 0]);
 
@@ -201,7 +206,7 @@ svg.selectAll(".rect")
     .attr("height", function(d) { return height - y(d.value); })
     .append('title')
     .text(function (d) { return "Number of satellites: "+d.value;});
-    
-    
-    
+
+
+
 }

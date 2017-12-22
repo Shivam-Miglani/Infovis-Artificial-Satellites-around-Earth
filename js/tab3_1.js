@@ -4,8 +4,8 @@ start3();
 function select3(){
             var Purpose = document.getElementById("Purpose").value;
             var Users1 = document.getElementById("Users1").value;
-            
-            
+
+
             if(Purpose=="All" && Users1=="All"){start3();start4()} //calls the initial overview drawing
             else{
                 update3(Purpose, Users1); //updates the drawing according to the selection
@@ -27,8 +27,8 @@ function start3(){
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
-    
+
+
 
 
 var x = d3.scaleBand().rangeRound([0, width]).padding(0.1)
@@ -103,7 +103,7 @@ svg.selectAll(".rect")
 }
 
 function update3(Purpose, Users1){
-    
+
     d3.select("#cc").selectAll("g").remove();
 
     var margin = {top: 80, right: 70, bottom: 90, left: 70},
@@ -115,20 +115,21 @@ function update3(Purpose, Users1){
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
+
 var scByCountry1 = d3.nest()
-    .key(function(d) { if (d.Purpose==Purpose && d.Users==Users1){return d.Country; }
+    .key(function(d) {if (d.Purpose==Purpose && d.Users==Users1){return d.Country; }
                      else if(Users1=="All"){if (d.Purpose==Purpose){return d.Country;}}
                      else if(Purpose=="All"){if (d.Users==Users1){return d.Country;}}})
     .rollup(function(v){
         return v.length })
     .entries(satellites);
- var scByCountry2 = scByCountry1.slice(1);  
-    
-    if(Purpose=="Technology Development"){
+ var scByCountry2 = scByCountry1.slice(1);
+
+    if(Purpose=="Technology Development" || Users1=="Civil" ){
         scByCountry2 = scByCountry2.slice(1);
     }
-    
+
+    console.log(JSON.stringify(scByCountry1));
     console.log(JSON.stringify(scByCountry2));
 
 var x = d3.scaleBand().rangeRound([0, width]).padding(0.1)
@@ -200,8 +201,8 @@ svg.selectAll(".rect")
     .attr("height", function(d) { return height - y(d.value); })
     .append('title')
     .text(function (d) { return "Number of satellites: "+d.value;});
-    
 
 
-    
+
+
 }
