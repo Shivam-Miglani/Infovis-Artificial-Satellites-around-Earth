@@ -128,13 +128,26 @@ var scByLaunchYear1 = d3.nest()
     .entries(satellites)
     .sort(function(a, b){ return d3.ascending(+a.key, +b.key); });
 
-    var scByLaunchYear2 = scByLaunchYear1.slice(1);
+    var scByLaunchYear2 = scByLaunchYear1;
+    var position=0;
+    for(var i in scByLaunchYear1){
 
-
-
-    if(Purpose=="Technology Development" || Users1=="Civil" ){
-        scByLaunchYear2 = scByLaunchYear2.slice(1);
+        if(scByLaunchYear1[i].value > 500){
+            position = i;
+            console.log("zzz"+i);
+            break;
+        }
     }
+    console.log(position);
+    scByLaunchYear2.splice(position,1);
+    console.log("scByLaunchYear1:"+scByLaunchYear1);
+    console.log("scByLaunchYear2:"+scByLaunchYear2);
+    //
+    //
+    //
+    // if(Purpose=="Technology Development" || Users1=="Civil" ){
+    //     scByLaunchYear2 = scByLaunchYear2.slice(1);
+    // }
 
     // console.log(JSON.stringify(scByLaunchYear1));
     // console.log(JSON.stringify(scByLaunchYear2));
@@ -142,10 +155,10 @@ var scByLaunchYear1 = d3.nest()
 var x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
 var y = d3.scaleLinear().range([height, 0]);
 
-x.domain(scByLaunchYear.map(function (d) {
+x.domain(scByLaunchYear2.map(function (d) {
     return d.key;
 }));
-y.domain([0, d3.max(scByLaunchYear, function (d) {
+y.domain([0, d3.max(scByLaunchYear2, function (d) {
     return d.value;
 })]);
 
@@ -206,7 +219,5 @@ svg.selectAll(".rect")
     .attr("height", function(d) { return height - y(d.value); })
     .append('title')
     .text(function (d) { return "Number of satellites: "+d.value;});
-
-
 
 }
