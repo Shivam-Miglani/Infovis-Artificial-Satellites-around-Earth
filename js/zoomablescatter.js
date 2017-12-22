@@ -8,8 +8,8 @@ var margin, width, height, colors, colorScale, x, y, tooltip, xAxis, yAxis, svg,
 function select(){
             var Country = document.getElementById("Country").value;
             var Users = document.getElementById("Users").value;
-            
-            
+
+
             if(Country=="All" && Users=="All"){start()} //calls the initial overview drawing
             else{
             update(Country , Users); //updates the drawing according to the selection
@@ -32,7 +32,7 @@ d3.csv('data_ellipse.csv', function (data) {
      colorScale = d3.scaleOrdinal()
         .domain(["LEO", "MEO", "GEO", "Elliptical"])
         .range(colors);
-    
+
     //X-Scale
 
      x = d3.scaleLinear()
@@ -69,7 +69,7 @@ d3.csv('data_ellipse.csv', function (data) {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
+
     //clip definition
      clip = svg.append("defs").append("svg:clipPath")
         .attr("id", "clip")
@@ -110,7 +110,7 @@ d3.csv('data_ellipse.csv', function (data) {
         .attr("opacity", 0.5)
         .style("fill", function (d) { return colorScale(d.ClassOfOrbit)})
         .on('mouseover', function () {
-            
+
             d3.select(this)
                 .transition()
                 .duration(500)
@@ -119,16 +119,16 @@ d3.csv('data_ellipse.csv', function (data) {
                 //.attr('stroke', 'black')
         })
         .on('mouseout', function () {
-            
+
             d3.select(this)
                 .transition()
                 .duration(500)
                 .attr('r',4)
 
         })
-        .append('title') // Appending Tooltip 
+        .append('title') // Appending Tooltip
         .text(function (d) { return d.NameofSatellite +
-            '\nEccentricity: ' + d.Eccentricity +
+            '\nEccentricity: ' + d.ecc +
             '\nInclination: ' + d.Inclination +
             '\nClass of orbit: ' + d.ClassOfOrbit});
 
@@ -178,7 +178,7 @@ d3.csv('data_ellipse.csv', function (data) {
             scatter.select(".brush").call(brush.move, null);
         }
         zoom();
-    
+
     }
 
     function idled() {
@@ -198,15 +198,15 @@ d3.csv('data_ellipse.csv', function (data) {
             .attr("cy", function (d) { if (d.Country==Country && d.Users==Users){return y(d.ecc)}
                               else if(Country=="All") {if(d.Users==Users){return y(d.ecc)}}
                               else if(Users=="All") {if(d.Country==Country){return y(d.ecc)}}});
-        
+
     }
 })
 }
 
-//this function is exactly identical to the update function but this draws all the datapoints 
+//this function is exactly identical to the update function but this draws all the datapoints
 function start(){
     start1();
-    
+
     d3.csv('data_ellipse.csv', function (data) {
 
     svg = d3.select("#scattersvg")
@@ -214,7 +214,7 @@ function start(){
     margin = { top: 50, right: 20, bottom: 30, left: 30 };
     width = 600 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
-        
+
      colors = ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]
      colorScale = d3.scaleOrdinal()
         .domain(["LEO", "MEO", "GEO", "Elliptical"])
@@ -284,7 +284,7 @@ function start(){
         .attr("opacity", 0.5)
         .style("fill", function (d) { return colorScale(d.ClassOfOrbit)})
         .on('mouseover', function () {
-            
+
             d3.select(this)
                 .transition()
                 .duration(500)
@@ -293,7 +293,7 @@ function start(){
                 //.attr('stroke', 'black')
         })
         .on('mouseout', function () {
-            
+
             d3.select(this)
                 .transition()
                 .duration(500)
@@ -352,7 +352,7 @@ function start(){
             scatter.select(".brush").call(brush.move, null);
         }
         zoom();
-        
+
     }
 
     function idled() {
@@ -367,8 +367,8 @@ function start(){
         scatter.selectAll("circle").transition(t)
             .attr("cx", function (d) { return x(d.Inclination); })
             .attr("cy", function (d) { return y(d.ecc); });
-        
+
     }
 })
-    
+
 }
